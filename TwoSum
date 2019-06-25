@@ -1,0 +1,28 @@
+//python 3
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        dict = {}
+        for i in range(len(nums)):
+            t=target-nums[i]
+            if t in dict:
+                return (dict[t],i)
+            dict[nums[i]]=i
+ 
+//C++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> imap;
+        vector<int> result;
+        for(int i=0;i<nums.size();i++){
+            int Ntofind = target - nums[i];
+            if(imap.find(Ntofind)!=imap.end()){
+                result.push_back(imap[Ntofind]);
+                result.push_back(i);
+                return result;
+            }
+            imap[nums[i]]=i;
+        }
+    return result;        
+    }
+};

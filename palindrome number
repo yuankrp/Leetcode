@@ -1,0 +1,39 @@
+//C++
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        int n=0;
+        int num=x;
+        while(num>0){
+            num/=10;
+            n++;
+        }
+        bool t=true;
+        if(x<0){
+            t=false;
+        }
+        int a=0;
+        int b=0;
+        for(int i=1; i<((n/2)+1); i++){
+            a=(x%int(pow(10,n-i+1)))/int(pow(10,n-i));
+            b=(x%int(pow(10,i)))/int(pow(10,i-1));
+            if(a!=b){
+                t=false;
+            }
+        }
+        return t;        
+    }
+};
+
+//python
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x<0: return False
+        n=str(x)
+        l=len(n)
+        k=int(l/2)
+        for i in range(k):
+            if n[i]!=n[l-i-1]:
+                return False
+        return True
+        

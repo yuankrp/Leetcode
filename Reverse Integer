@@ -1,0 +1,49 @@
+//C++
+class Solution {
+public:
+    int reverse(int x) {
+        if (x>=(pow(2,31)-1) || x<=(-pow(2,31))){
+            return 0;
+        }
+        int n=0;
+        int m=abs(x);
+        int num=m;
+        while(num>0){
+            num/=10;
+            n++;
+        }
+        int a=0;
+        int t=0;
+        for(int i=1; i<(n+1); i++){
+            a=(m%int(pow(10,n-i+1)))/int(pow(10,n-i));
+            t=t+a*pow(10,i-1);
+        }
+        if (t>=(pow(2,31)-1) || t<=(-pow(2,31))){
+            return 0;
+        }
+        if (x<0) {
+            return -t;
+        }
+        else return t;        
+    }
+};
+
+//Python
+class Solution:
+    def reverse(self, x: int) -> int:
+        if x>(math.pow(2,31)-1) or x<-math.pow(2,31): return 0
+        a=abs(x)
+        n=str(a)
+        new_n=list(n)
+        l=len(n)
+        k=int(l/2)
+        for i in range(k):
+            F_n=new_n[i]
+            L_n=new_n[l-i-1]
+            new_n[i]=L_n
+            new_n[l-i-1]=F_n         
+        t = int(''.join(new_n))
+        if t>(math.pow(2,31)-1) or t<-math.pow(2,31): return 0
+        if x<0: return -t
+        else: return t
+        

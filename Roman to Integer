@@ -1,0 +1,66 @@
+//C++
+class Solution {
+public:
+    int romanToInt(string s) {
+        int len=s.length();
+        int t=0;
+        for(int i=0;i<len;i++){
+            if(s[len-i-1]=='M'){
+                t=t+1000;
+            }
+            if(s[len-i-1]=='D'){
+                t=t+500;
+            }
+            if(s[len-i-1]=='L'){
+                t=t+50;
+            }
+            if(s[len-i-1]=='V'){
+                t=t+5;
+            }
+            if(s[len-i-1]=='C'){
+                if((i!=0)&&((s[len-i]=='D')||(s[len-i]=='M'))){
+                    t=t-100;
+                }
+                else t=t+100;
+            }
+            if(s[len-i-1]=='X'){
+                if((i!=0)&&((s[len-i]=='L')||(s[len-i]=='C'))){
+                    t=t-10;
+                }
+                else t=t+10;
+            }
+            if(s[len-i-1]=='I'){
+                if((i!=0)&&((s[len-i]=='V')||(s[len-i]=='X'))){
+                    t=t-1;
+                }
+                else t=t+1;
+            }           
+        }
+        return t;
+    }
+};
+
+//Python
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        r=list(s)
+        le=len(s)
+        t=0
+        for i in range(le):
+            if r[le-i-1]=='M': t=t+1000
+            if r[le-i-1]=='D': t=t+500
+            if r[le-i-1]=='L': t=t+50
+            if r[le-i-1]=='V': t=t+5
+            if r[le-i-1]=='C':
+                if i!=0 and (r[le-i]=='D' or r[le-i]=='M'):
+                    t=t-100
+                else: t=t+100
+            if r[le-i-1]=='X':
+                if i!=0 and (r[le-i]=='L' or r[le-i]=='C'):
+                    t=t-10
+                else: t=t+10
+            if r[le-i-1]=='I':
+                if i!=0 and (r[le-i]=='V' or r[le-i]=='X'):
+                    t=t-1
+                else: t=t+1
+        return t

@@ -1,0 +1,56 @@
+//C++
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string results="";
+        int l_vec=strs.size();
+        if(l_vec==0){
+            return results;
+        }
+        if(l_vec==1){
+            return strs[0];
+        }
+        string s=strs[0];
+        int l_str=s.size();
+        int lg=0;
+        int t=0;
+        for(int i=1;i<l_str+1;i++){
+            t=0;
+            for(int j=1;j<l_vec;j++){
+                string a=strs[j];
+                if(s.substr(0,i)==a.substr(0,i)){
+                    t++;
+                }
+            }
+            if(t==l_vec-1){
+                if(i>lg){
+                    lg=i;
+                    results=s.substr(0,i);
+                }
+            }
+        }
+        return results;
+    }
+};
+
+//Python
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        results=""
+        len_str=len(strs)
+        if len_str==0: return results
+        if len_str==1: return strs[0]
+        first_letter=strs[0]
+        len_let=len(first_letter)
+        lg=0        
+        for j in range(1,len_let+1):
+            pf=first_letter[0:j]
+            t=0
+            for k in range(1,len_str):
+                s=strs[k]
+                if pf==s[0:j]: t=t+1
+            if t==len_str-1:
+                if j>lg:
+                    lg=j
+                    results=pf
+        return results

@@ -4,7 +4,7 @@ public:
     string longestCommonPrefix(vector<string>& strs) {
         string results="";
         int l_vec=strs.size();
-        if(l_vec==0){
+        if(strs.empty()){
             return results;
         }
         if(l_vec==1){
@@ -12,22 +12,13 @@ public:
         }
         string s=strs[0];
         int l_str=s.size();
-        int lg=0;
-        int t=0;
-        for(int i=1;i<l_str+1;i++){
-            t=0;
+        for(int i=0;i<l_str+1;i++){
             for(int j=1;j<l_vec;j++){
-                string a=strs[j];
-                if(s.substr(0,i)==a.substr(0,i)){
-                    t++;
+                if(s.substr(0,i)!=strs[j].substr(0,i)){
+                    return results;
                 }
             }
-            if(t==l_vec-1){
-                if(i>lg){
-                    lg=i;
-                    results=s.substr(0,i);
-                }
-            }
+        results=s.substr(0,i);
         }
         return results;
     }
@@ -48,9 +39,7 @@ class Solution:
             t=0
             for k in range(1,len_str):
                 s=strs[k]
-                if pf==s[0:j]: t=t+1
-            if t==len_str-1:
-                if j>lg:
-                    lg=j
-                    results=pf
+                if(first_letter[0:j]!=s[0:j]):
+                    return results
+            results=first_letter[0:j]
         return results

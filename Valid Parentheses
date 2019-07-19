@@ -1,0 +1,67 @@
+//C++
+class Solution {
+public:
+    bool isValid(string s) {
+        vector<char> v;
+        for(int i=0; i<s.length(); i++){
+            if(s[i]=='('||s[i]=='{'||s[i]=='['){
+                v.push_back(s[i]);
+            }
+            else if(v.empty()){
+                return false;
+            }
+            else if(s[i]==')'){
+                if(v.back()=='('){
+                    v.pop_back();
+                }
+                else{
+                    return false;
+                }
+            }
+            else if(s[i]==']'){
+                if(v.back()=='['){
+                    v.pop_back();
+                }
+                else{
+                    return false;
+                }
+            }
+            else if(s[i]=='}'){
+                if(v.back()=='{'){
+                    v.pop_back();
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        if(v.empty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
+
+//Python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        ls=[]
+        for i in range(len(s)):
+            if s[i]=='(' or s[i]=='[' or s[i]=='{':
+                ls.append(s[i])            
+            elif s[i]==')':
+                if ls==[]: return False
+                elif ls[-1]!='(': return False
+                else: ls.pop()
+            elif s[i]==']':
+                if ls==[]: return False
+                elif ls[-1]!='[': return False
+                else: ls.pop()
+            elif s[i]=='}':
+                if ls==[]: return False
+                elif ls[-1]!='{': return False
+                else: ls.pop()
+        if ls!=[]: return False
+        else: return True

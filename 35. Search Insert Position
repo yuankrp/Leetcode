@@ -1,0 +1,28 @@
+//C++
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        if(nums.size()==0){
+            return 0;
+        }
+        else{
+            for(int i=0;i<nums.size();i++){
+                if(target<=nums[i]){
+                    return i;
+                }
+            }
+            return nums.size();
+        }        
+    }
+};
+
+//Python
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        if nums==[]: return 0
+        else:
+            i=0
+            while i<len(nums):
+                if target<=nums[i]: return i
+                else: i=i+1
+            return i

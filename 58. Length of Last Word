@@ -1,0 +1,30 @@
+//C++
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        bool flag=false;
+        int st=0;
+        for(int i=s.length()-1;i>=0;i--){
+            if(s[i]!=' '){
+                st++;
+                flag=true;
+            }
+            else if(flag||i==0){
+                return st;
+            }
+        }
+        return st;
+    }
+};
+
+//Python
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        flag=0
+        st=0
+        for i in range(len(s)-1,-1,-1):
+            if s[i]!=' ':
+                st=st+1
+                flag=1
+            elif flag or i==0: return st
+        return st

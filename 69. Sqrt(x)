@@ -1,0 +1,39 @@
+//C++
+class Solution {
+public:
+    int mySqrt(int x) {
+        if(x==1){
+            return 1;
+        }
+        int nmax=x;
+        int nmin=0;
+        int h=0;
+        while(nmax-nmin>1){
+            h=(nmax+nmin)/2;
+            if(x/h==h){
+                return h;
+            }
+            else if(x/h<h){
+                nmax=h;
+            }
+            else if(x/h>h){
+                nmin=h;
+            }
+        }
+        return nmin;
+    }
+};
+
+//Python
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x==1: return 1
+        n_max=x
+        n_min=0
+        h=0
+        while n_max-n_min>1:
+            h=int((n_max+n_min)/2)
+            if x/h<h: n_max=h
+            elif x/h>h:n_min=h
+            else: return h
+        return n_min

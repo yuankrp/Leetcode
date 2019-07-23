@@ -1,0 +1,59 @@
+//C++
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(root==NULL){
+            return true;
+        }
+        vector<TreeNode*> Vnode;
+        Vnode.insert(Vnode.begin(),root->left);
+        Vnode.push_back(root->right);
+        TreeNode *Npre,*Npost;
+        while(!Vnode.empty()){
+            Npre=Vnode[0];
+            Npost=Vnode[Vnode.size()-1];
+            Vnode.erase(Vnode.begin());
+            Vnode.pop_back();
+            if(Npre==NULL&&Npost==NULL){
+                continue;
+            }
+            else if((Npre==NULL)+(Npost==NULL)==1){
+                return false;
+            }
+            else if(Npre->val!=Npost->val){
+                return false;
+            }
+            else{
+                Vnode.insert(Vnode.begin(),Npre->right);
+                Vnode.insert(Vnode.begin(),Npre->left);
+                Vnode.push_back(Npost->left);
+                Vnode.push_back(Npost->right);                
+            }
+        }
+        return true;
+    }    
+};
+
+//Python
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if root==None: return True
+        a=root.left
+        b=root.right
+        LN=[]
+        LN.append(a)
+        LN.append(b)
+        while len(LN)>0:
+            Npre=LN[0]
+            Npost=LN[len(LN)-1]
+            del LN[0]
+            del LN[len(LN)-1]
+            if (Npre==None)+(Npost==None)==1: return False
+            elif Npre==None and Npost==None: continue
+            elif Npre.val!=Npost.val: return False
+            else:
+                LN.insert(0,Npre.right)
+                LN.insert(0,Npre.left)
+                LN.append(Npost.left)
+                LN.append(Npost.right)
+        return True

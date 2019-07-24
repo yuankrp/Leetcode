@@ -1,0 +1,43 @@
+//C++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int L=prices.size();
+        if(L==0 || L==1){
+            return 0;
+        }
+        int base=prices[0];
+        int profit=0;
+        for(int i=1;i<L;i++){
+            if(prices[i]>=prices[i-1]){
+                if(i==L-1){
+                    profit=profit+prices[i]-base;
+                }
+                else{
+                    continue;
+                }
+            }
+            else{
+                profit=profit+prices[i-1]-base;
+                base=prices[i];
+            }
+        }
+        return profit;       
+    }
+};
+
+//Python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        L=len(prices)
+        if L==0 or L==1: return 0
+        base=prices[0]
+        profit=0
+        for i in range(1,L):
+            if prices[i]>=prices[i-1]:
+                if i==L-1: profit=profit+prices[i]-base
+                else: continue
+            else:
+                profit=profit+prices[i-1]-base
+                base=prices[i]
+        return profit

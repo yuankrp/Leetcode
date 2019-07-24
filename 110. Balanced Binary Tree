@@ -1,0 +1,79 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        if(root==NULL){
+            return true;
+        }
+        int left=treeDepth(root->left);
+        int right=treeDepth(root->right);
+        if(abs(left-right)>1){
+            return false;
+        }
+        else{
+            return isBalanced(root->left) && isBalanced(root->right);
+        }
+    }
+    
+    int treeDepth(TreeNode* root){
+        if(root==NULL){
+            return 0;
+        }
+        vector<TreeNode*> LN;
+        LN.push_back(root);
+        int depth=0;
+        while(!LN.empty()){
+            depth++;
+            int L=LN.size();
+            for(int i=0;i<L;i++){
+                if(LN[i]->left!=NULL){
+                    LN.push_back(LN[i]->left);
+                }
+                if(LN[i]->right!=NULL){
+                    LN.push_back(LN[i]->right);
+                }
+            }
+            LN.erase(LN.begin(),LN.begin()+L);
+        }
+        return depth;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        if root==None: return True
+        left=self.treeDepth(root.left)
+        right=self.treeDepth(root.right)
+        if abs(left-right)>1: return False
+        else: return self.isBalanced(root.left) and self.isBalanced(root.right)
+        
+    def treeDepth(self, root: TreeNode) -> int:
+        if root==None: return 0
+        LN=[]
+        LN.append(root)
+        depth=0
+        while(len(LN)>0):
+            depth=depth+1
+            L=len(LN)
+            for i in range(L):
+                if LN[i].left!=None: LN.append(LN[i].left)
+                if LN[i].right!=None: LN.append(LN[i].right)
+            del LN[0:L]
+        return depth

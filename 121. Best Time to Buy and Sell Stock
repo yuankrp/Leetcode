@@ -1,0 +1,44 @@
+//C++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int L=prices.size();
+        if(L==0 || L==1){
+            return 0;
+        }
+        int p_max=prices[L-1];
+        int p_min=prices[L-1];
+        int best=0;
+        for(int i=L-2;i>=0;i--){
+            if(prices[i]>p_max){
+                p_max=prices[i];
+                p_min=prices[i];
+            }
+            if(prices[i]<p_min){
+                p_min=prices[i];
+                if(p_max-p_min>best){
+                    best=p_max-p_min;
+                }
+            }
+        }            
+        return best;
+    }
+};
+
+//Python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        L=len(prices)
+        if L==0 or L==1: return 0
+        p_max=prices[L-1]
+        p_min=prices[L-1]
+        best=0
+        for i in range(1,L):
+            if prices[L-i-1]>p_max:
+                p_max=prices[L-i-1]
+                p_min=prices[L-i-1]
+            if prices[L-i-1]<p_min:
+                p_min=prices[L-i-1]
+                if p_max-p_min>best:
+                    best=p_max-p_min
+        return best

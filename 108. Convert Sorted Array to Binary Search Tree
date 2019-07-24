@@ -1,0 +1,44 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+        int L=nums.size();
+        if(L==0){
+            return NULL;
+        }
+        int mid=L/2;
+        TreeNode *root= new TreeNode(nums[mid]);
+        vector<int> vleft(nums.begin(),nums.begin()+mid);
+        vector<int> vright(nums.begin()+mid+1,nums.begin()+L);
+        root->left=sortedArrayToBST(vleft);
+        root->right=sortedArrayToBST(vright);
+        return root;        
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:            
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        L=len(nums)
+        if L==0: return None
+        mid=int(L/2)
+        root=TreeNode(nums[mid])
+        root.left=self.sortedArrayToBST(nums[0:mid])
+        root.right=self.sortedArrayToBST(nums[mid+1:L])
+        return root

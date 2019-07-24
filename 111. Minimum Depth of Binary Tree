@@ -1,0 +1,61 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if(root==NULL){
+            return 0;
+        }
+        vector<TreeNode*> vNode;
+        vNode.push_back(root);
+        int depth=0;
+        while(!vNode.empty()){
+            depth++;
+            int L=vNode.size();
+            for(int i=0;i<L;i++){
+                if(vNode[i]->left==NULL&&vNode[i]->right==NULL){
+                    return depth;
+                }
+                if(vNode[i]->left!=NULL){
+                    vNode.push_back(vNode[i]->left);
+                }
+                if(vNode[i]->right!=NULL){
+                    vNode.push_back(vNode[i]->right);
+                }
+            }
+            vNode.erase(vNode.begin(),vNode.begin()+L);
+        }
+        return depth;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        if root==None: return 0
+        LN=[]
+        LN.append(root)
+        depth=0
+        while len(LN)>0:
+            depth=depth+1
+            L=len(LN)
+            for i in range(L):
+                if LN[i].left==None and LN[i].right==None: return depth
+                if LN[i].left!=None: LN.append(LN[i].left)                      
+                if LN[i].right!=None: LN.append(LN[i].right)
+            del LN[0:L]

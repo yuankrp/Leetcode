@@ -1,0 +1,19 @@
+//C++
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int s=0;
+        for(int i=0;i<nums.size();i++){
+            s^=nums[i];
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        s=0
+        for i in nums:
+            s^=i
+        return s

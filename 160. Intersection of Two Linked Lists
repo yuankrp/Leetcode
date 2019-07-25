@@ -1,0 +1,79 @@
+//C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *p=headA;
+        ListNode *q=headB;
+        int la=0;
+        int lb=0;
+        while(p){
+            la++;
+            p=p->next;
+        }
+        while(q){
+            lb++;
+            q=q->next;
+        }
+        if(!la || !lb){
+            return NULL;
+        } 
+        if(la>lb){
+            for(int i=0;i<la-lb;i++){
+                headA=headA->next;
+            }
+        }
+        else if(lb>la){
+            for(int i=0;i<lb-la;i++){
+                headB=headB->next;
+            }
+        }
+        while(headA!=headB){
+            headA=headA->next;
+            headB=headB->next;
+        }
+        return headA;
+    }
+};
+
+//Python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        p=headA
+        q=headB
+        la=0
+        lb=0
+        while p:
+            la+=1
+            p=p.next
+        while q:
+            lb+=1
+            q=q.next
+        if not la or not lb: return None
+        if la>lb:
+            for i in range(la-lb):
+                headA=headA.next
+        elif lb>la:
+            for i in range(lb-la):
+                headB=headB.next
+        while headA!=headB:
+            headA=headA.next
+            headB=headB.next
+        return headA

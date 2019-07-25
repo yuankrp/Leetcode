@@ -1,0 +1,49 @@
+//C++
+class Solution {
+public:
+    string convertToTitle(int n) {
+        int t=1;
+        int num=n-1;
+        while(num/26>0){
+            t++;
+            num=num/26;
+        }
+        int s=n%26;
+        char right;
+        if(s!=0){
+            right='A'+s-1;
+            n=n-s;
+        }   
+        else{
+            right='Z';
+            n=n-26;
+        }
+        string str;
+        str.push_back(right);
+        if(t==1){
+            return str;
+        }
+        else{
+            return convertToTitle(n/26) + str;
+        }
+    }
+};
+
+//Python
+class Solution:
+    def convertToTitle(self, n: int) -> str:
+        t=1
+        num=n-1
+        while int(num/26)>0:
+            t=t+1
+            num=num/26
+        s=n%26
+        if s!=0:
+            right=chr(ord('A')+s-1)
+            n=n-s
+        else:
+            right="Z"
+            n=n-26        
+        if t==1: return right
+        else:
+            return self.convertToTitle(int(n/26)) + right

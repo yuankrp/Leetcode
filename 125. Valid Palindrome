@@ -1,0 +1,50 @@
+//C++
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        if(s==""){
+            return true;
+        }
+        int L=s.length();
+        int i=0;
+        int j=0;
+        while(i+j<L){
+            if(isalnum(s[i])&&isalnum(s[L-1-j])){
+                if(tolower(s[i])==tolower(s[L-1-j])){
+                    i++;
+                    j++;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                if(!isalnum(s[i])){
+                    i++;
+                }
+                if(!isalnum(s[L-1-j])){
+                    j++;
+                }
+            }
+        }
+        return true;      
+    }
+};
+
+//Python
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        if s=="": return True
+        L=len(s)
+        i=0
+        j=0
+        while i+j<L:
+            if s[i].isalnum() and s[L-1-j].isalnum():
+                if s[i].lower()==s[L-1-j].lower():
+                    i=i+1
+                    j=j+1
+                else: return False
+            else:
+                if not s[i].isalnum(): i=i+1
+                if not s[L-1-j].isalnum(): j=j+1
+        return True

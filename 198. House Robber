@@ -1,0 +1,33 @@
+//C++
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if(nums.size()==0){
+            return 0;
+        }
+        if(nums.size()==1){
+            return nums[0];
+        }
+        if(nums.size()==2){
+            return max(nums[0],nums[1]);
+        }
+        vector<int> v{nums[0],max(nums[0],nums[1])};
+        for(int i=2;i<nums.size();i++){
+            v.push_back(max(nums[i]+v[i-2],v[i-1]));
+        }
+        return v.back();       
+    }
+};
+
+//Python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums)==0: return 0
+        if len(nums)==1: return nums[0]
+        if len(nums)==2: return max(nums[0],nums[1])
+        m=[]
+        m.append(nums[0])
+        m.append(max(nums[0],nums[1]))
+        for i in range(2,len(nums)):
+            m.append(max(nums[i]+m[i-2],m[i-1]))
+        return m[-1]

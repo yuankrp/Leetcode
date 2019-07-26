@@ -1,0 +1,21 @@
+//C++
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        for(int i=0;i<k;i++){
+            nums.insert(nums.begin(),nums[nums.size()-1]);
+            nums.pop_back();
+        }
+    }
+};
+
+//Python
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        L=[]
+        L=nums[len(nums)-k:len(nums)]
+        del nums[len(nums)-k:len(nums)]
+        nums[0:0]=L

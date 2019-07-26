@@ -1,0 +1,23 @@
+//C++
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        uint32_t s = 0;
+        for(int i=0;i<32;i++){
+            s <<= 1;
+            s += ((n >> i) & 1);
+        }
+        return s;       
+    }
+};
+
+//Python
+class Solution:
+    # @param n, an integer
+    # @return an integer
+    def reverseBits(self, n):
+        s = 0
+        for i in range(32):
+            s <<= 1
+            s += ((n >> i) & 1)
+        return s

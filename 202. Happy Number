@@ -1,0 +1,41 @@
+//C++
+class Solution {
+public:
+    bool isHappy(int n) {
+        vector<int> v={};
+        return isHappy2(n,v);
+    }
+    bool isHappy2(int n, vector<int> &v){
+        v.push_back(n);
+        int s=0;
+        while(n>0){
+            s+=pow(n%10,2);
+            n=n/10;
+        }
+        if(s==1){
+            return true;
+        }
+        else if(find(v.begin(),v.end(),s)!=v.end()){
+            return false;
+        }
+        else{
+            return isHappy2(s,v);
+        }
+    }
+};
+
+//Python
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        L=[]
+        return self.isHappy2(n,L)
+    
+    def isHappy2(self, n: int, L: List[int]) -> bool:
+        L.append(n)
+        s=0
+        while n>0:
+            s+=pow(n%10,2)
+            n=int(n/10)
+        if s==1: return True
+        if s in L: return False
+        else: return self.isHappy2(s,L)

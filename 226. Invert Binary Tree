@@ -1,0 +1,140 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(root==NULL){
+            return NULL;
+        }
+        if(root->left && root->right){
+            invertNode(root->left,root->right);
+        }
+        else if (root->left && !root->right){
+            root->right=root->left;
+            root->left=NULL;
+            invertTree2(root->right);
+        }
+        else if (!root->left && root->right){
+            root->left=root->right;
+            root->right=NULL;
+            invertTree2(root->left);
+        }
+        return root;        
+    }
+    
+    void invertTree2(TreeNode* root) {
+        if(root->left&&root->right){
+            invertNode(root->left,root->right);
+        }
+        else if (root->left && !root->right){
+            root->right=root->left;
+            root->left=NULL;
+            invertTree2(root->right);
+        }
+        else if (!root->left && root->right){
+            root->left=root->right;
+            root->right=NULL;
+            invertTree2(root->left);
+        }
+    }
+    
+    void invertNode(TreeNode* p,TreeNode* q) {
+        int a=p->val;
+        int b=q->val;
+        q->val=a;
+        p->val=b;
+        if(p->left && q->right){
+            invertNode(p->left,q->right);
+        }
+        else if (p->left && !q->right){
+            q->right=p->left;
+            p->left=NULL;
+            invertTree2(q->right);
+        }
+        else if (!p->left && q->right){
+            p->left=q->right;
+            q->right=NULL;
+            invertTree2(p->left);
+        }
+        if(q->left && p->right){
+            invertNode(q->left,p->right);
+        }
+        else if (q->left && !p->right){
+            p->right=q->left;
+            q->left=NULL;
+            invertTree2(p->right);
+        }
+        else if (!q->left && p->right){
+            q->left=p->right;
+            p->right=NULL;
+            invertTree2(q->left);
+        }   
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if not root: return None
+        if root.left and root.right:
+            self.invertNode(root.left,root.right)
+        elif root.left and not root.right:
+            root.right=root.left
+            root.left=None
+            self.invertTree2(root.right)
+        elif root.right and not root.left:
+            root.left=root.right
+            root.right=None
+            self.invertTree2(root.left)
+        return root
+    
+    def invertTree2(self, root: TreeNode):
+        if root.left and root.right:
+            self.invertNode(root.left,root.right)
+        elif root.left and not root.right:
+            root.right=root.left
+            root.left=None
+            self.invertTree2(root.right)
+        elif root.right and not root.left:
+            root.left=root.right
+            root.right=None
+            self.invertTree2(root.left)
+            
+    def invertNode(self, p: TreeNode, q: TreeNode):
+        a=p.val
+        b=q.val
+        q.val=a
+        p.val=b
+        if p.left and q.right: self.invertNode(p.left,q.right)
+        elif p.left and not q.right:
+            q.right=p.left
+            p.left=None
+            self.invertTree2(q.right)
+        elif not p.left and q.right:
+            p.left=q.right
+            q.right=None
+            self.invertTree2(p.left)
+        if p.right and q.left: self.invertNode(p.right,q.left)  
+        elif p.right and not q.left:
+            q.left=p.right
+            p.right=None
+            self.invertTree2(q.left)
+        elif not p.right and q.left:
+            p.right=q.left
+            q.left=None
+            self.invertTree2(p.right)

@@ -1,0 +1,48 @@
+//C++
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        if(s==""||t==""){
+            return true;
+        }
+        map<char,char> imap;
+        vector<char> vec;
+        for(int i=0;i<s.length();i++){
+            if(imap.find(s[i])!=imap.end()){
+                if(imap[s[i]]==t[i]){
+                    continue;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                if(find(vec.begin(),vec.end(),t[i])!=vec.end()){
+                    return false;
+                }
+                else{
+                    vec.push_back(t[i]);
+                    imap[s[i]]=t[i];
+                }
+            }
+        }
+        return true;        
+    }
+};
+
+//Python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        if not s or not t: return True
+        D={}
+        L=[]
+        for i in range(len(s)):
+            if s[i] in D:
+                if D[s[i]]==t[i]: continue
+                else: return False
+            else:
+                if t[i] in L: return False
+                else:
+                    L.append(t[i])
+                    D[s[i]]=t[i]
+        return True

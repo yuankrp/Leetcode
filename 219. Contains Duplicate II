@@ -1,0 +1,36 @@
+//C++
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        if(nums.size()==0){
+            return false;
+        }
+        map<int,int> imap;
+        for(int i=0;i<nums.size();i++){
+            if(imap.find(nums[i])==imap.end()){
+                imap[nums[i]]=i;
+            }
+            else{
+                if(i-imap[nums[i]]<=k){
+                    return true;
+                }
+                else{
+                    imap[nums[i]]=i;
+                }
+            }
+        }
+        return false;
+    }
+};
+
+//Python
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        if len(nums)==0: return False
+        D={}
+        for i in range(len(nums)):
+            if nums[i] not in D: D[nums[i]]=i
+            else:
+                if i-D[nums[i]]<=k: return True
+                else: D[nums[i]]=i
+        return False

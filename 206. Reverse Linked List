@@ -1,0 +1,50 @@
+//C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+        vector<int> vec;
+        ListNode* p=head;
+        while(p!=NULL){
+            vec.push_back(p->val);
+            p=p->next;
+        }
+        p=head;
+        for(int i=vec.size()-1;i>=0;i--){
+            p->val=vec[i];
+            p=p->next;
+        }
+        return head;
+    }
+};
+
+//Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head==None or head.next==None: return head
+        L=[]
+        p=head
+        while p!=None:
+            L.append(p.val)
+            p=p.next
+        p=head
+        for i in range(len(L)-1,-1,-1):
+            p.val=L[i]
+            p=p.next
+        return head

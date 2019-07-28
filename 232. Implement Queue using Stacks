@@ -1,0 +1,94 @@
+//C++
+class MyQueue {
+private:
+    stack<int> S;
+    stack<int> SS;
+public:
+    /** Initialize your data structure here. */
+    MyQueue() {
+        
+    }
+    
+    /** Push element x to the back of queue. */
+    void push(int x) {
+        while(!S.empty()){
+            SS.push(S.top());
+            S.pop();
+        }
+        S.push(x);
+        while(!SS.empty()){
+            S.push(SS.top());
+            SS.pop();
+        }
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {
+        int p=S.top();
+        S.pop();
+        return p;
+    }
+    
+    /** Get the front element. */
+    int peek() {
+        return S.top();
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return S.empty();
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
+ 
+ //Python
+ class MyQueue:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.S=[]
+
+    def push(self, x: int) -> None:
+        """
+        Push element x to the back of queue.
+        """
+        self.S.append(x)
+
+    def pop(self) -> int:
+        """
+        Removes the element from in front of queue and returns that element.
+        """
+        p=self.S[0]
+        del self.S[0]
+        return p
+
+    def peek(self) -> int:
+        """
+        Get the front element.
+        """
+        return self.S[0]
+
+    def empty(self) -> bool:
+        """
+        Returns whether the queue is empty.
+        """
+        if len(self.S)==0: return True
+        else: return False
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()

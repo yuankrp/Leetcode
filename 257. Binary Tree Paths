@@ -1,0 +1,63 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        if(!root){
+            return {};
+        }
+        vector<string> res;
+        vector<string> path{""};
+        vector<TreeNode*> TN{root};
+        while(TN.size()>0){
+            TreeNode* node=TN.back();
+            string p=path.back();
+            TN.pop_back();
+            path.pop_back();
+            if(!node->left && !node->right){
+                res.push_back(p+to_string(node->val));
+            }
+            if(node->left){
+                TN.push_back(node->left);
+                path.push_back(p+to_string(node->val)+"->");
+            }
+            if(node->right){
+                TN.push_back(node->right);
+                path.push_back(p+to_string(node->val)+"->");
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        if not root: return root
+        LN=[(root,'')]
+        res=[]
+        while len(LN)>0:
+            node, path=LN.pop()
+            if not node.left and not node.right:
+                res.append(path+str(node.val))
+            else:
+                if node.left:
+                    LN.append((node.left,path+str(node.val)+'->'))
+                if node.right:
+                    LN.append((node.right,path+str(node.val)+'->'))
+        return res       

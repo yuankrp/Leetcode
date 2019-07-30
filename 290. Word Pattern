@@ -1,0 +1,69 @@
+//C++
+class Solution {
+public:
+    bool wordPattern(string pattern, string str) {
+        map<string,char> imap;
+        vector<char> vec;
+        int lp=pattern.length();
+        int ls=0;
+        int left=0;
+        int right=0;
+        for(int i=0;i<str.length();i++){
+            if(str[i]==' '||i==str.length()-1){
+                ls++;
+                if(ls>lp){
+                    return false;
+                }
+                string temp;
+                if(i==str.length()-1){
+                    temp=str.substr(left,i-left+1);
+                }
+                else{
+                    temp=str.substr(left,i-left);
+                }
+                if(i!=str.length()-1){
+                    left=i+1;
+                }  
+                if(imap.find(temp)!=imap.end()){
+                    if(imap[temp]==pattern[ls-1]){
+                        continue;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    if(find(vec.begin(),vec.end(),pattern[ls-1])!=vec.end()){
+                        return false;
+                    }
+                    else{
+                        imap[temp]=pattern[ls-1];
+                        vec.push_back(pattern[ls-1]);
+                    }
+                }
+            }
+        }
+        if(ls!=lp-1){
+            return false;
+        }
+        return true;
+    }
+};
+
+//Python
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        D={}
+        L=[]
+        s=str.split(" ")
+        if len(s)!=len(pattern): return False
+        for i in range(len(s)):
+            if s[i] not in D:
+                if pattern[i] in L: return False
+                else:
+                    D[s[i]]=pattern[i]
+                    L.append(pattern[i])
+            else:
+                if D[s[i]]==pattern[i]: continue
+                else: return False
+        return True

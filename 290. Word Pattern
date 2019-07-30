@@ -7,7 +7,6 @@ public:
         int lp=pattern.length();
         int ls=0;
         int left=0;
-        int right=0;
         for(int i=0;i<str.length();i++){
             if(str[i]==' '||i==str.length()-1){
                 ls++;
@@ -43,7 +42,7 @@ public:
                 }
             }
         }
-        if(ls!=lp-1){
+        if(ls!=lp){
             return false;
         }
         return true;

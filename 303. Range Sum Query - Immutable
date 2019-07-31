@@ -1,0 +1,41 @@
+//C++
+class NumArray {
+private:
+    vector<int> s;
+public:
+    NumArray(vector<int>& nums) {
+        if(nums.size()!=0){
+            s.push_back(nums[0]);
+            for(int i=1;i<nums.size();i++){
+                s.push_back(s[i-1]+nums[i]);
+            }
+        }      
+    }
+    
+    int sumRange(int i, int j) {
+        if(i==0){
+            return s[j];
+        }
+        else return s[j]-s[i-1];
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * int param_1 = obj->sumRange(i,j);
+ */
+ 
+ //Python
+ class NumArray:
+    
+    def __init__(self, nums: List[int]):
+        self.N=nums
+
+    def sumRange(self, i: int, j: int) -> int:
+        a=self.N[i:j+1]
+        return sum(a)
+      
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(i,j)

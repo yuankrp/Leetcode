@@ -1,0 +1,51 @@
+//C++
+// Forward declaration of guess API.
+// @param num, your guess
+// @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
+int guess(int num);
+
+class Solution {
+public:
+    int guessNumber(int n) {
+        int nmax=n;
+        int nmin=1;
+        int mid=nmin+(nmax-nmin)/2;
+        while(guess(mid)!=0){
+            if(guess(mid)==-1){
+                nmax=mid;
+                mid=nmin+(nmax-nmin)/2;
+            }
+            else if(nmax-1>mid){
+                nmin=mid;
+                mid=nmin+(nmax-nmin)/2;
+            }
+            else mid=nmax;
+        }  
+        return mid;
+    }
+};
+
+//Python
+# The guess API is already defined for you.
+# @param num, your guess
+# @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
+# def guess(num):
+
+class Solution(object):
+    def guessNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        nmax=n
+        nmin=1
+        mid=int(nmin+(nmax-nmin)/2)
+        while guess(mid)!=0:
+            if guess(mid)==-1:
+                nmax=mid
+                mid=int(nmin+(nmax-nmin)/2)
+            elif nmax-1>mid:
+                nmin=mid
+                mid=int(nmin+(nmax-nmin)/2)
+            else: mid=nmax
+        return mid

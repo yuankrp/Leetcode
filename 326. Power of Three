@@ -1,0 +1,18 @@
+//C++
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        if(n<=0) return false;
+        if(n==1) return true;
+        if(n%3!=0) return false;
+        else return isPowerOfThree(n/3);
+    }
+};
+
+//Python
+class Solution:
+    def isPowerOfThree(self, n: int) -> bool:
+        if n<=0: return False
+        if n==1: return True
+        if n%3!=0: return False
+        else: return self.isPowerOfThree(n/3)

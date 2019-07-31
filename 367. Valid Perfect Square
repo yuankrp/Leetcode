@@ -1,0 +1,22 @@
+//C++
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        int a=num;
+        while(pow(a,2)>num) a=a/2;
+        while(pow(a,2)<num) a++;
+        if(pow(a,2)==num) return true;
+        else return false;
+    }
+};
+
+//Python
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        a=num
+        while pow(a,2)>num:
+            a=int(a/2)
+        while pow(a,2)<num:
+            a=a+1
+        if pow(a,2)==num: return True
+        else: return False

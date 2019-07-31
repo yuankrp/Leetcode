@@ -1,0 +1,42 @@
+//C++
+class Solution {
+public:
+    string reverseVowels(string s) {
+        vector<int> D;
+        vector<char> L;
+        for(int i=0;i<s.length();i++){
+            if(s[i]=='a' || s[i]=='A' || s[i]=='e' || s[i]=='E' || s[i]=='i' || s[i]=='I' || s[i]=='o' || s[i]=='O' || s[i]=='u' || s[i]=='U'){
+                D.push_back(i);
+                L.push_back(s[i]);
+            }
+            else continue;
+        }
+        reverse(L.begin(),L.end());
+        string ls(s);
+        if(L.size()<=1) return s;
+        else{
+            for(int i=0;i<L.size();i++){
+                ls[D[i]]=L[i];
+            }
+            return ls;
+        }
+    }
+};
+
+//Python
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        D=[]
+        L=[]
+        for i in range(len(s)):
+            if s[i]=='a' or s[i]=='A' or s[i]=='e' or s[i]=='E' or s[i]=='i' or s[i]=='I' or s[i]=='o' or s[i]=='O' or s[i]=='u' or s[i]=='U':
+                D.append(i)
+                L.append(s[i])
+            else: continue
+        L.reverse()
+        ls=list(s)
+        if len(L)<=1: return s
+        else:
+            for i in range(len(L)):
+                ls[D[i]]=L[i]
+            return ''.join(ls)

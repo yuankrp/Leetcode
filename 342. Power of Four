@@ -1,0 +1,18 @@
+//C++
+class Solution {
+public:
+    bool isPowerOfFour(int num) {
+        if(num<=0) return false;
+        if(num==1) return true;
+        if(num%4!=0) return false;
+        else return isPowerOfFour(num/4);
+    }
+};
+
+//Python
+class Solution:
+    def isPowerOfFour(self, num: int) -> bool:
+        if num<=0: return False
+        if num==1: return True
+        if num%4!=0: return False
+        else: return self.isPowerOfFour(num/4)

@@ -1,0 +1,22 @@
+//C++
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> vec;
+        for(int i=0;i<nums1.size();i++){
+            if((find(nums2.begin(),nums2.end(),nums1[i])!=nums2.end())&&(find(vec.begin(),vec.end(),nums1[i])==vec.end())){
+                vec.push_back(nums1[i]);
+            }
+        }
+        return vec;
+    }
+};
+
+//Python
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        L=[]
+        for i in range(len(nums1)):
+            if (nums1[i] in nums2) and (nums1[i] not in L): L.append(nums1[i])
+            else: continue
+        return L

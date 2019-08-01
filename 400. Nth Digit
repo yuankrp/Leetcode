@@ -1,0 +1,45 @@
+//C++
+class Solution {
+public:
+    int findNthDigit(int n) {
+        int i=9;
+        int j=1;
+        int s=0;
+        while(j<9&&s<n-i*j){
+            s+=i*j;
+            i=i*10;
+            j++;
+            cout<<j<<endl;
+        }
+        int a=(n-s)%j;
+        int b=(n-s)/j;
+        if(a==0){
+            int num=pow(10,j-1)+b-1;
+            return num%10;
+        }
+        else{
+            int num=pow(10,j-1)+b;
+            num=num/pow(10,j-a);
+            return num%10;
+        }
+    }
+};
+
+//Python
+class Solution:
+    def findNthDigit(self, n: int) -> int:
+        i=9
+        j=1
+        s=0
+        while s+i*j<n:
+            s+=i*j
+            i=i*10
+            j+=1
+        a=(n-s)%j
+        b=int((n-s)/j)
+        if a==0:
+            num=pow(10,j-1)+b-1
+            return num%10
+        else:
+            num=pow(10,j-1)+b
+            return int(num/pow(10,j-a)%10)

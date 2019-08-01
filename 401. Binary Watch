@@ -1,0 +1,55 @@
+//C++
+class Solution {
+public:
+    vector<string> readBinaryWatch(int num) {
+        vector<vector<int>> H{{0},{1,2,4,8},{3,5,6,9,10},{7,11}};
+        vector<vector<int>> M{{0},{1,2,4,8,16,32},{3,5,6,9,10,12,17,18,20,24,33,34,36,40,48},{7,11,13,14,19,21,22,25,26,28,35,37,38,41,42,44,49,50,52,56},{15,23,27,29,30,39,43,45,46,51,53,54,57,58},{31,47,55,59}};
+        int min_h=0;
+        while(num-min_h>5){
+            min_h++;
+        }
+        vector<string> L;
+        for(int h=min_h;h<min(4,num+1);h++){
+            int m=num-h;
+            vector<int> hList(H[h]);
+            vector<int> mList(M[m]);
+            for(int i=0;i<hList.size();i++){
+                for(int j=0;j<mList.size();j++){
+                    string str_h=to_string(hList[i]);
+                    string str_m;
+                    if(mList[j]<10){
+                        str_m=to_string(0)+to_string(mList[j]);
+                    }
+                    else{
+                        str_m=to_string(mList[j]);
+                    }
+                    cout<<str_h<<endl;
+                    L.push_back(str_h+":"+str_m);
+                }
+            }
+        }
+        return L;
+    }
+};
+
+//Python
+class Solution:
+    def readBinaryWatch(self, num: int) -> List[str]:
+        if num>8: return None
+        H=[[0],[1,2,4,8],[3,5,6,9,10],[7,11]]
+        M=[[0],[1,2,4,8,16,32],[3,5,6,9,10,12,17,18,20,24,33,34,36,40,48],[7,11,13,14,19,21,22,25,26,28,35,37,38,41,42,44,49,50,52,56],[15,23,27,29,30,39,43,45,46,51,53,54,57,58],[31,47,55,59]]
+        min_h=0
+        while num-min_h>5:
+            min_h+=1
+        L=[]
+        for h in range(min_h,min(4,num+1)):
+            m=num-h
+            hList=H[h]
+            mList=M[m]
+            for i in range(len(hList)):
+                for j in range(len(mList)):
+                    str_h=str(hList[i])
+                    if mList[j]<10: str_m=str(0)+str(mList[j])
+                    else: str_m=str(mList[j])
+                    L.append(str_h+":"+str_m)
+        return L

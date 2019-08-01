@@ -1,0 +1,61 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        int s=0;
+        if(!root) return s;
+        if(!root->left && !root->right) return s;
+        vector<TreeNode*> VN{root};
+        while(VN.size()>0){
+            int L=VN.size();
+            for(int i=0;i<L;i++){
+                if(VN[i]->left){
+                    VN.push_back(VN[i]->left);
+                    if(!VN[i]->left->left && !VN[i]->left->right){
+                        s+=VN[i]->left->val;
+                    }
+                }
+                if(VN[i]->right){
+                    VN.push_back(VN[i]->right);
+                }
+            }
+            VN.erase(VN.begin(),VN.begin()+L);
+        }
+        return s;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        s=0
+        if not root: return s
+        if not root.left and not root.right: return s
+        LN=[root]
+        while len(LN)>0:
+            L=len(LN)
+            for i in range(L):
+                if LN[i].left:
+                    LN.append(LN[i].left)
+                    if not LN[i].left.left and not LN[i].left.right:
+                        s+=LN[i].left.val
+                if LN[i].right:
+                    LN.append(LN[i].right)
+            del LN[0:L]
+        return s

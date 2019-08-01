@@ -1,0 +1,24 @@
+//C++
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        vector<char> v;
+        for(int i=0;i<s.length();i++){
+            if(find(v.begin(),v.end(),s[i])!=v.end()) continue;
+            else if(s.substr(i+1,s.length()).find(s[i])!=s.npos) v.push_back(s[i]);
+            else return i;
+        }
+        return -1;
+    }
+};
+
+//Python
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        L=[]
+        st=list(s)
+        for i in range(len(s)):
+            if st[i] in L: continue
+            elif st[i] in st[i+1:len(s)]: L.append(st[i])
+            else: return i
+        return -1

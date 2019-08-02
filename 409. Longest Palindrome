@@ -1,0 +1,43 @@
+//C++
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        vector<char> L;
+        int n=0,len=0,flag=0;
+        for(char letter: s){
+            if(find(L.begin(),L.end(),letter)!=L.end()) continue;
+            else{
+                L.push_back(letter);
+                n=count(s.begin(),s.end(),letter);
+                if(n%2==0){
+                    len+=n;
+                }
+                else{
+                    len+=n-1;
+                    flag=1;
+                }
+            }
+        }
+        if(flag) len+=1;
+        return len;
+    }
+};
+
+//Python
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        sl=list(s)
+        L=[]
+        l=0
+        flag=0
+        for letter in sl:
+            if letter in L: continue
+            else:
+                L.append(letter)
+                if sl.count(letter)%2==0:
+                    l+=sl.count(letter)
+                else:
+                    l+=sl.count(letter)-1
+                    flag=1
+        if flag: l+=1
+        return l

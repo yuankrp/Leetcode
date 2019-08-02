@@ -1,0 +1,57 @@
+//C++
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        string s="";
+        int a=0,b=0,c=0,res=0;
+        while(num1.length() || num2.length()){
+            if(num1.length()){
+                a=num1[num1.length()-1];
+                num1.pop_back();
+            }
+            else a='0';
+            if(num2.length()){
+                b=num2[num2.length()-1];
+                num2.pop_back();
+            }
+            else b='0';
+            res=(a-'0')+(b-'0')+c;
+            if(res>9){
+                s=to_string(res-10)+s;
+                c=1;
+            }
+            else{
+                s=to_string(res)+s;
+                c=0;
+            }
+        }
+        if(c) s="1"+s;
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        n1=list(num1)
+        n2=list(num2)
+        s=""
+        c=0
+        while len(n1) or len(n2):
+            if len(n1):
+                a=n1[-1]
+                n1.pop()
+            else: a=0
+            if len(n2):
+                b=n2[-1]
+                n2.pop()
+            else: b=0
+            res=int(a)+int(b)+int(c)
+            if res>9:
+                s=str(res-10)+s
+                c=1
+            else:
+                s=str(res)+s
+                c=0
+        if c: s="1"+s
+        return s

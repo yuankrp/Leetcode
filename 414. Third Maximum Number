@@ -1,0 +1,26 @@
+//C++
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        sort(nums.rbegin(),nums.rend());
+        int flag=0;
+        for(int i=0;i<nums.size()-1;i++){
+            if(nums[i+1]<nums[i]){
+                if(flag==1) return nums[i+1];
+                else flag++;
+            }
+        }
+        return nums[0];
+    }
+};
+
+//Python
+class Solution:
+    def thirdMax(self, nums: List[int]) -> int:
+        nums.sort()
+        flag=0
+        for i in range(len(nums)-1,0,-1):
+            if nums[i-1]<nums[i]:
+                if flag==1: return nums[i-1]
+                else: flag+=1
+        return nums[-1]

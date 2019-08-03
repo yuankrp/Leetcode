@@ -1,0 +1,66 @@
+//C++
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+class Solution {
+public:
+    vector<vector<int>> levelOrder(Node* root) {
+        vector<vector<int>> V;
+        if(!root){
+            return V;
+        }
+        vector<Node*> vNode{root};
+        while(vNode.size()>0){
+            int s=vNode.size();
+            vector<int> VAL;
+            for(int i=0;i<s;i++){
+                VAL.push_back(vNode[i]->val);
+                if(vNode[i]->children.size()>0){
+                    for(int j=0;j<vNode[i]->children.size();j++){
+                        vNode.push_back(vNode[i]->children[j]);
+                    }
+                }
+            }
+            V.push_back(VAL);
+            vNode.erase(vNode.begin(),vNode.begin()+s);
+        }
+        return V;
+    }
+};
+
+//Python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, children):
+        self.val = val
+        self.children = children
+"""
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        L=[]
+        if not root: return L
+        LN=[root]
+        while len(LN)>0:
+            s=len(LN)
+            LV=[]
+            for i in range(s):
+                LV.append(LN[i].val)
+                if len(LN[i].children)>0:
+                    for j in range(len(LN[i].children)):
+                        LN.append(LN[i].children[j])
+            L.append(LV)
+            del LN[0:s]
+        return L

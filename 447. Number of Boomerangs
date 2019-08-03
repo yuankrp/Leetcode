@@ -1,0 +1,32 @@
+//C++
+class Solution {
+public:
+    int numberOfBoomerangs(vector<vector<int>>& points) {
+        int s=0;
+        for(int i=0;i<points.size();i++){
+            map<int,int> imap;
+            for(vector<int> v: points){
+                int n=pow(points[i][0]-v[0],2)+pow(points[i][1]-v[1],2);
+                if(imap.find(n)==imap.end()) imap[n]=1;
+                else imap[n]++;
+            }
+            for(map<int, int>::iterator iter=imap.begin();iter!=imap.end();iter++){
+                s+=iter->second*(iter->second-1);
+            }
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def numberOfBoomerangs(self, points: List[List[int]]) -> int:
+        s=0
+        for i in range(len(points)):
+            D={}
+            for p in points:
+                n=pow(points[i][0]-p[0],2)+pow(points[i][1]-p[1],2)
+                if n not in D: D[n]=1
+                else: D[n]+=1
+            for d in D: s+=D[d]*(D[d]-1)
+        return s

@@ -1,0 +1,24 @@
+//C++
+class Solution {
+public:
+    int countSegments(string s) {
+        int n=0;
+        if(s.length()==0) return 0;
+        for(int i=0;i<s.length()-1;i++){
+            if(s[i]!=' ' && s[i+1]==' ') n++;
+        }
+        if(s.back()!=' ') n++;
+        return n;
+    }
+};
+
+//Python
+class Solution:
+    def countSegments(self, s: str) -> int:
+        ls=list(s)
+        n=0
+        if len(ls)==0: return 0
+        for i in range(len(ls)-1):
+            if ls[i]!=' ' and ls[i+1]==' ': n+=1
+        if ls[-1]!=' ': n+=1
+        return n

@@ -1,0 +1,94 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int pathSum(TreeNode* root, int sum) {
+        map<TreeNode*,vector<int>> imap;
+        if(!root){
+            return 0;
+        }
+        int s=0;
+        vector<TreeNode*> vNode{root};
+        if(root->val==sum){
+            s++;
+        }
+        imap[root]={root->val};
+        while(vNode.size()>0){
+            int d=vNode.size();
+            for(int i=0;i<d;i++){
+                if(vNode[i]->left){
+                    vNode.push_back(vNode[i]->left);
+                    vector<int> tempV;
+                    for(int j=0;j<imap[vNode[i]].size();j++){
+                        tempV.push_back(imap[vNode[i]][j]+vNode[i]->left->val);
+                        if(tempV[j]==sum) s++;
+                    }
+                    if(vNode[i]->left->val==sum) s++;
+                    tempV.push_back(vNode[i]->left->val);
+                    imap[vNode[i]->left]=tempV;
+                }
+                if(vNode[i]->right){
+                    vNode.push_back(vNode[i]->right);
+                    vector<int> tempV;
+                    for(int j=0;j<imap[vNode[i]].size();j++){
+                        tempV.push_back(imap[vNode[i]][j]+vNode[i]->right->val);
+                        if(tempV[j]==sum) s++;
+                    }
+                    if(vNode[i]->right->val==sum) s++;
+                    tempV.push_back(vNode[i]->right->val);
+                    imap[vNode[i]->right]=tempV;
+                }
+            }
+            vNode.erase(vNode.begin(),vNode.begin()+d);
+        }
+        return s;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        D={}
+        if not root: return 0
+        s=0
+        L=[root]
+        if root.val==sum: s+=1
+        D[root]=[root.val]
+        while len(L)>0:
+            d=len(L)
+            for i in range(d):
+                if L[i].left:
+                    L.append(L[i].left)
+                    v_list=[]
+                    for j in range(len(D[L[i]])):
+                        v_list.append(D[L[i]][j]+L[i].left.val)
+                        if v_list[j]==sum: s+=1
+                    if L[i].left.val==sum: s+=1
+                    v_list.append(L[i].left.val)
+                    D[L[i].left]=v_list
+                if L[i].right:
+                    L.append(L[i].right)
+                    v_list=[]
+                    for j in range(len(D[L[i]])):
+                        v_list.append(D[L[i]][j]+L[i].right.val)
+                        if v_list[j]==sum: s+=1
+                    if L[i].right.val==sum: s+=1
+                    v_list.append(L[i].right.val)
+                    D[L[i].right]=v_list
+            del L[0:d]
+        return s

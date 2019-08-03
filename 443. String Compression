@@ -1,0 +1,46 @@
+//C++
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int i=0;
+        int start=i;
+        while(i<chars.size()){
+            if(i==chars.size()-1 || chars[i]!=chars[i+1]){
+                int c=i-start+1;
+                if(c>1){
+                    chars.erase(chars.begin()+start+1,chars.begin()+i+1);
+                    string str=to_string(c);
+                    for(int j=0;j<str.length();j++){
+                        chars.insert(chars.begin()+start+1+j,str[j]);
+                    }
+                    i=start+1+str.length();
+                    start=i;  
+                }
+                else{
+                    i++;
+                    start=i;
+                }
+            }
+            else i++;
+        }
+        return chars.size();
+    }
+};
+
+//Python
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        i=0
+        start=i
+        while i<len(chars):
+            if i==len(chars)-1 or chars[i]!=chars[i+1]:
+                c=i-start+1
+                if c>1:
+                    chars[start+1:i+1]=list(str(c))
+                    i=start+1+len(str(c))
+                    start=i            
+                else:
+                    i+=1
+                    start=i
+            else: i+=1
+        return len(chars)

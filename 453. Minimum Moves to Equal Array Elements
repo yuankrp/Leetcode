@@ -1,0 +1,22 @@
+//C++
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        int nmin=nums[0];
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]<nmin) nmin=nums[i];
+        }
+        int s=0;
+        for(int n: nums) s+=n-nmin;
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def minMoves(self, nums: List[int]) -> int:
+        s=0
+        i=min(nums)
+        for n in nums:
+            s+=n-i
+        return s

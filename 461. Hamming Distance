@@ -1,0 +1,23 @@
+//C++
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int c=x^y;
+        int s=0;
+        while(c>0){
+            if(c&1==1) s++;
+            c=c>>1;
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        c=x^y
+        s=0
+        while c>0:
+            if c&1==1: s+=1
+            c=c>>1
+        return s

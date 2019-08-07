@@ -1,0 +1,36 @@
+//C++
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> v;
+        for(int n: nums1){
+            vector<int>::iterator iter=find(nums2.begin(),nums2.end(),n);
+            int i=distance(nums2.begin(),iter);
+            int flag=1;
+            while(i<nums2.size()&&flag){
+                if(nums2[i]>n){
+                    v.push_back(nums2[i]);
+                    flag=0;
+                }
+                i++;
+            }
+            if(flag) v.push_back(-1);
+        }
+        return v;
+    }
+};
+
+//Python
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        L=[]
+        for n in nums1:
+            i=nums2.index(n)
+            flag=1
+            while i<len(nums2) and flag:
+                if nums2[i]>n:
+                    L.append(nums2[i])
+                    flag=0
+                i+=1
+            if flag==1: L.append(-1)
+        return L

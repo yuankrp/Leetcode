@@ -1,0 +1,54 @@
+//C++
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+        vector<char> L1={'q','w','e','r','t','y','u','i','o','p'};
+        vector<char> L2={'a','s','d','f','g','h','j','k','l'};
+        vector<char> L3={'z','x','c','v','b','n','m'};
+        vector<string> res;
+        for(int i=0;i<words.size();i++){
+            string w=words[i];
+            int flag=1;
+            if(find(L1.begin(),L1.end(),tolower(w[0]))!=L1.end()){
+                for(char c: w){
+                    if(find(L1.begin(),L1.end(),tolower(c))==L1.end()) flag=0;
+                }
+            }
+            if(find(L2.begin(),L2.end(),tolower(w[0]))!=L2.end()){
+                for(char c: w){
+                    if(find(L2.begin(),L2.end(),tolower(c))==L2.end()) flag=0;
+                }
+            }
+            if(find(L3.begin(),L3.end(),tolower(w[0]))!=L3.end()){
+                for(char c: w){
+                    if(find(L3.begin(),L3.end(),tolower(c))==L3.end()) flag=0;
+                }
+            }
+            if(flag) res.push_back(words[i]);
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def findWords(self, words: List[str]) -> List[str]:
+        L1=['q','w','e','r','t','y','u','i','o','p']
+        L2=['a','s','d','f','g','h','j','k','l']
+        L3=['z','x','c','v','b','n','m']
+        L=[]
+        for i in range(len(words)):
+            w=words[i].lower()
+            flag=1
+            if w[0] in L1:
+                for c in w:
+                    if c not in L1: flag=0
+            elif w[0] in L2:
+                for c in w:
+                    if c not in L2: flag=0
+            else:
+                for c in w:
+                    if c not in L3: flag=0
+            if flag: L.append(words[i])
+        return L
+        

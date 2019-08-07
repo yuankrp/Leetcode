@@ -1,0 +1,29 @@
+//C++
+class Solution {
+public:
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int s=0,temp=0;
+        for(int n: nums){
+            if(n) temp++;
+            else{
+                if(temp>s) s=temp;
+                temp=0;
+            }
+        }
+        if(temp>s) s=temp;
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        s=0
+        temp=0
+        for n in nums:
+            if n: temp+=1
+            else:
+                if temp>s: s=temp
+                temp=0
+        if temp>s: s=temp
+        return s

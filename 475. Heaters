@@ -1,0 +1,37 @@
+//C++
+class Solution {
+public:
+    int findRadius(vector<int>& houses, vector<int>& heaters) {
+        sort(houses.begin(),houses.end());
+        sort(heaters.begin(),heaters.end());
+        vector<int> L;
+        int i=0,s=0,res=0;
+        for(int h : houses){
+            if(i<heaters.size()) s=abs(h-heaters[i]);
+            else s=abs(h-heaters.back());
+            while(i+1<heaters.size() && abs(h-heaters[i+1])<=s){
+                s=abs(h-heaters[i+1]);
+                i++;
+            }
+            if(s>res) res=s;
+        }            
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def findRadius(self, houses: List[int], heaters: List[int]) -> int:
+        houses.sort()
+        heaters.sort()
+        L=[]
+        i=0
+        r=0
+        for h in houses:            
+            if i<len(heaters): s=abs(h-heaters[i])
+            else: s=abs(h-heaters[-1])
+            while i+1<len(heaters) and abs(h-heaters[i+1])<=s:
+                s=abs(h-heaters[i+1])
+                i+=1
+            if s>r: r=s
+        return r

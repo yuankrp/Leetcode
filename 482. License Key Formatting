@@ -1,0 +1,33 @@
+//C++
+class Solution {
+public:
+    string licenseKeyFormatting(string S, int K) {
+        string s;
+        for(char c: S){
+            if(c!='-') s+=toupper(c);
+        }
+        int L=s.length()%K;
+        string res=s.substr(0,L);
+        for(int i=L;i<s.length();i++){
+            if((i-L)%K==0 && i+L) res+="-";
+            res+=s[i];
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def licenseKeyFormatting(self, S: str, K: int) -> str:
+        res=""
+        flag=0
+        for i in range(len(S)-1,-1,-1):
+            if S[i]=='-': continue
+            elif flag==K:
+                res="-"+res
+                res=S[i]+res
+                flag=1
+            else:
+                res=S[i]+res
+                flag+=1
+        return res.upper()

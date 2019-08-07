@@ -1,0 +1,29 @@
+//C++
+class Solution {
+public:
+    vector<int> constructRectangle(int area) {
+        int s=sqrt(area);
+        vector<int> v;
+        while(s>0){
+            if(area%s==0){
+                v.push_back(area/s);
+                v.push_back(s);
+                break;
+            }
+            else s--;
+        }
+        return v;
+    }
+};
+
+//Python
+class Solution:
+    def constructRectangle(self, area: int) -> List[int]:
+        s=int(math.sqrt(area))
+        while s>0:
+            if area%s==0:
+                L=int(area/s)
+                W=s
+                break          
+            else: s-=1
+        return [L,W]

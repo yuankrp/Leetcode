@@ -1,0 +1,28 @@
+//C++
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
+        if(word.length()==1) return true;
+        bool flag;
+        if(word[0]<'a') flag=(word[1]<'a');
+        else flag=0;
+        for(int i=1;i<word.length();i++){
+            if((word[i]<'a')==flag) continue;
+            else return false;
+        }
+        return true;
+    }
+};
+
+//Python
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        if len(word)==1: return True
+        if word[0:1].isupper():
+            flag=word[1:2].isupper()
+        else:
+            flag=0
+        for i in range(1,len(word)):
+            if word[i:i+1].isupper()==flag: continue
+            else: return False
+        return True

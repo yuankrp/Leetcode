@@ -1,0 +1,66 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> findMode(TreeNode* root) {
+        vector<int> res;
+        if(!root) return res;
+        vector<TreeNode*> vNode;
+        vNode.push_back(root);
+        map<int,int> imap;
+        while(vNode.size()>0){
+            TreeNode* TN=vNode.back();
+            vNode.pop_back();
+            if(imap.find(TN->val)!=imap.end()) imap[TN->val]++;
+            else imap[TN->val]=1;
+            if(TN->left) vNode.push_back(TN->left);
+            if(TN->right) vNode.push_back(TN->right);
+        }
+        map<int, int>::iterator iter=imap.begin();
+        int m=iter->second;
+        while(iter!=imap.end()){
+            if(iter->second==m) res.push_back(iter->first);
+            else if(iter->second>m){
+                m=iter->second;
+                res.clear();
+                res.push_back(iter->first);
+            }
+            iter++;
+        }
+        return res;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def findMode(self, root: TreeNode) -> List[int]:
+        if not root: return []
+        LN=[root]
+        D={}
+        while len(LN)>0:
+            TN=LN.pop()
+            if TN.val in D: D[TN.val]+=1
+            else: D[TN.val]=1
+            if TN.left: LN.append(TN.left)
+            if TN.right: LN.append(TN.right)
+        res=[]
+        m=max(D.values())
+        for k,v in D.items():
+            if v==m:
+                res.append(k)
+        return res

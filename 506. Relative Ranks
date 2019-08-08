@@ -1,0 +1,35 @@
+//C++
+class Solution {
+public:
+    vector<string> findRelativeRanks(vector<int>& nums) {
+        vector<int> v(nums);
+        sort(v.begin(),v.end());
+        map<int,int> imap;
+        for(int i=v.size()-1;i>=0;i--){
+            imap[v[i]]=v.size()-i;
+        }
+        vector<string> res;
+        for(int n: nums){
+            if(imap[n]==1) res.push_back("Gold Medal");
+            else if(imap[n]==2) res.push_back("Silver Medal");
+            else if(imap[n]==3) res.push_back("Bronze Medal");
+            else res.push_back(to_string(imap[n]));
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def findRelativeRanks(self, nums: List[int]) -> List[str]:
+        L=nums.copy()
+        L.sort()
+        D={}
+        for i in range(len(L)-1,-1,-1): D[L[i]]=len(L)-i
+        res=[]
+        for n in nums:
+            if D[n]==1: res.append("Gold Medal")
+            elif D[n]==2: res.append("Silver Medal")
+            elif D[n]==3: res.append("Bronze Medal")
+            else: res.append(str(D[n]))
+        return res

@@ -1,0 +1,16 @@
+//C++
+class Solution {
+public:
+    int findLUSlength(string a, string b) {
+        if(a.length()!=b.length()) return max(a.length(),b.length());
+        if(a!=b) return a.length();
+        else return -1;
+    }
+};
+
+//Python
+class Solution:
+    def findLUSlength(self, a: str, b: str) -> int:
+        if len(a)!=len(b): return max(len(a),len(b))
+        if a!=b: return len(a)
+        else: return -1

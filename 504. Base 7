@@ -1,0 +1,28 @@
+//C++
+class Solution {
+public:
+    string convertToBase7(int num) {
+        int n=abs(num);
+        int i=0,s=0;
+        while(n>0){
+            s+=(n%7)*pow(10,i);
+            i++;
+            n=n/7;
+        }
+        if(num<0) s=-s;
+        return to_string(s);
+    }
+};
+
+//Python
+class Solution:
+    def convertToBase7(self, num: int) -> str:
+        n=abs(num)
+        i=0
+        s=0
+        while n>0:
+            s+=(n%7)*pow(10,i)
+            i+=1
+            n=int(n/7)
+        if num<0: s=-s
+        return str(s)

@@ -1,0 +1,53 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int getMinimumDifference(TreeNode* root) {
+        vector<TreeNode*> vN={root};
+        vector<int> vL;
+        while(vN.size()>0){
+            TreeNode* node=vN.back();
+            vN.pop_back();
+            vL.push_back(node->val);
+            if(node->left) vN.push_back(node->left);
+            if(node->right) vN.push_back(node->right);
+        }
+        sort(vL.begin(),vL.end());
+        int s=INT_MAX;
+        for(int i=0;i<vL.size()-1;i++){
+            if(vL[i+1]-vL[i]<s) s=vL[i+1]-vL[i];
+        }
+        return s;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        L=[root]
+        Lv=[]
+        while len(L)>0:
+            node=L.pop()
+            Lv.append(node.val)
+            if node.left: L.append(node.left)
+            if node.right: L.append(node.right)
+        Lv.sort()
+        s=sys.maxsize
+        for i in range(len(Lv)-1):
+            if Lv[i+1]-Lv[i]<s: s=Lv[i+1]-Lv[i]          
+        return s

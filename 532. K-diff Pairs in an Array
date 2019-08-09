@@ -1,0 +1,31 @@
+//C++
+class Solution {
+public:
+    int findPairs(vector<int>& nums, int k) {
+        if(k<0) return 0;
+        int s=0;
+        map<int,int> imap;
+        for(int n: nums) imap[n]++;
+        for(auto it: imap){
+            if(k==0){
+                if(it.second>1) s++;
+            }
+            else if(imap.find(it.first+k)!=imap.end()) s++;
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        s=0
+        if k==0:
+            c=collections.Counter(nums)
+            for n,v in c.items():
+                if v>1: s+=1
+        elif k>0:
+            nums=set(nums)
+            for n in nums:
+                if n+k in nums: s+=1
+        return s

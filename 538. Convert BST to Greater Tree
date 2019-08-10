@@ -1,0 +1,58 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        if(root==NULL) return root;
+        TreeNode* pNode=root;
+        vector<TreeNode*> vNode;
+        int val=0;
+        while(pNode!=NULL || !vNode.empty()){
+            if(pNode!=NULL){
+                vNode.push_back(pNode);
+                pNode=pNode->right;
+            }
+            else{
+                TreeNode* node=vNode.back();
+                vNode.pop_back();
+                node->val+=val;
+                val=node->val;
+                pNode=node->left;
+            }
+        }
+        return root;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def convertBST(self, root: TreeNode) -> TreeNode:
+        if not root: return root
+        pNode=root
+        L=[]
+        val=0
+        while pNode or len(L)>0:
+            if pNode:
+                L.append(pNode)
+                pNode=pNode.right
+            else:
+                node=L.pop()
+                node.val+=val
+                val=node.val
+                pNode=node.left
+        return root

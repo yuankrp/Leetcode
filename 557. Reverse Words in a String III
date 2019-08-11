@@ -1,0 +1,41 @@
+//C++
+class Solution {
+public:
+    string reverseWords(string s) {
+        vector<string> L;
+        string res;
+        for(int i=0,j=0;i<s.length();i++){
+            if(s[i]==' '){
+                reverse(s.begin()+j,s.begin()+i);
+                j=i+1;
+            }
+            else if(i==s.length()-1){
+                reverse(s.begin()+j,s.end());
+            }
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        s=list(s)
+        L=[]
+        res=""
+        i=0
+        j=0
+        while i<len(s):
+            if s[i]==' ':
+                a=s[j:i]
+                a.reverse()
+                L.append(''.join(a))
+                j=i+1
+            elif i==len(s)-1:
+                a=s[j:len(s)]
+                a.reverse()
+                L.append(''.join(a))
+            i+=1
+        for n in L:
+            res+=n+" "
+        return res[0:len(res)-1]

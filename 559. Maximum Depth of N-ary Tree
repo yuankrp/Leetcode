@@ -1,0 +1,45 @@
+//C++
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+class Solution {
+public:
+    int maxDepth(Node* root) {
+        if(root==NULL) return 0;
+        int d=0;
+        for(Node* n: root->children){
+            int a=maxDepth(n);
+            if(a>d) d=a;
+        }
+        return 1+d;
+    }
+};
+
+//Python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, children):
+        self.val = val
+        self.children = children
+"""
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        if not root: return 0
+        d=0
+        for n in root.children:
+            a=self.maxDepth(n)
+            if a>d: d=a
+        return 1+d

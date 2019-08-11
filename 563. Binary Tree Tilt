@@ -1,0 +1,57 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int findTilt(TreeNode* root) {
+        map<TreeNode*,int> imap;
+        if(root==NULL) return 0;
+        int t=abs(getSum(root->left,imap)-getSum(root->right,imap));
+        return t+findTilt(root->left)+findTilt(root->right);
+    }
+    
+    int getSum(TreeNode* root, map<TreeNode*,int> &m) {
+        if(root==NULL) return 0;
+        if(m.count(root)) return m[root];
+        else m[root]=root->val+getSum(root->left,m)+getSum(root->right,m);
+        return m[root];
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def findTilt(self, root: TreeNode) -> int:
+        if not root: return 0
+        s=0
+        L=[root]
+        while len(L)>0:
+            r=L.pop()
+            s+=abs(self.getSum(r.left)-self.getSum(r.right))
+            if r.left: L.append(r.left)
+            if r.right: L.append(r.right)
+        return s
+    
+    def getSum(self, root: TreeNode) -> int:
+        if not root: return 0
+        s=0
+        L=[root]
+        while len(L)>0:
+            r=L.pop()
+            s+=r.val
+            if r.left: L.append(r.left)
+            if r.right: L.append(r.right)
+        return s

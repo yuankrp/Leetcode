@@ -1,0 +1,59 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        if(root==NULL) return 0;
+        stack<TreeNode*> TN;
+        TN.push(root);
+        int s=0;
+        while(!TN.empty()){
+            TreeNode* p=TN.top();
+            TN.pop();
+            int d=getDepth(p->left)+getDepth(p->right);
+            if(d>s) s=d;
+            if(p->left!=NULL) TN.push(p->left);
+            if(p->right!=NULL) TN.push(p->right);
+        }
+        return s;
+    }
+    
+    int getDepth(TreeNode* root) {
+        if(root==NULL) return 0;
+        return 1+max(getDepth(root->left),getDepth(root->right));
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        if not root: return 0
+        TN=[root]
+        s=0
+        while len(TN)>0:
+            node=TN.pop()
+            a=self.maxDepth(node.right)+self.maxDepth(node.left)
+            if a>s: s=a
+            if node.right: TN.append(node.right)
+            if node.left: TN.append(node.left)
+        return s
+    
+    
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root: return 0
+        return 1+max(self.maxDepth(root.left),self.maxDepth(root.right))

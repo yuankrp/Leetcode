@@ -1,0 +1,23 @@
+//C++
+class Solution {
+public:
+    int distributeCandies(vector<int>& candies) {
+        sort(candies.begin(),candies.end());
+        int s=0;
+        for(int i=1;i<candies.size();i++){
+            if(candies[i]==candies[i-1]) s++;
+        }
+        if(s<=candies.size()/2) return candies.size()/2;
+        else return candies.size()-s;
+    }
+};
+
+//Python
+class Solution:
+    def distributeCandies(self, candies: List[int]) -> int:
+        candies.sort()
+        s=0
+        for i in range(1,len(candies)):
+            if candies[i]==candies[i-1]: s+=1
+        if s<=int(len(candies)/2): return int(len(candies)/2)
+        else: return len(candies)-s

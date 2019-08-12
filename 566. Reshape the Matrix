@@ -1,0 +1,33 @@
+//C++
+class Solution {
+public:
+    vector<vector<int>> matrixReshape(vector<vector<int>>& nums, int r, int c) {
+        vector<int> L;
+        for(vector<int> v: nums){
+            for(int n: v){
+                L.push_back(n);
+            }
+        }
+        if(L.size()!=r*c) return nums;
+        vector<vector<int>> res;
+        for(int i=0;i<r;i++){
+            vector<int> a;
+            a.assign(L.begin()+c*i,L.begin()+c*i+c);
+            res.push_back(a);
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def matrixReshape(self, nums: List[List[int]], r: int, c: int) -> List[List[int]]:
+        L=[]
+        for n in nums:
+            for i in n:
+                L.append(i)
+        if len(L)!=r*c: return nums
+        res=[]
+        for k in range(r):
+            res.append(L[c*k:c*k+c])
+        return res

@@ -1,0 +1,54 @@
+//C++
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+class Solution {
+public:
+    vector<int> postorder(Node* root) {
+        vector<int> res;
+        if(!root) return res;
+        vector<Node*> L{root};
+        while(L.size()>0){
+            Node* p=L.back();
+            L.pop_back();
+            res.insert(res.begin(),p->val);
+            for(int i=0;i<p->children.size();i++){
+                L.push_back(p->children[i]);
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, children):
+        self.val = val
+        self.children = children
+"""
+class Solution:
+    def postorder(self, root: 'Node') -> List[int]:
+        if not root: return []
+        L=[root]
+        res=[]
+        while len(L)>0:
+            p=L[-1]
+            L.pop()
+            res.insert(0,p.val)
+            for i in range(len(p.children)):
+                L.append(p.children[i])
+        return res

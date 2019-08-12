@@ -1,3 +1,4 @@
+----Solution 1
 //C++
 class Solution {
 public:
@@ -21,3 +22,23 @@ class Solution:
             if candies[i]==candies[i-1]: s+=1
         if s<=int(len(candies)/2): return int(len(candies)/2)
         else: return len(candies)-s
+
+----Solution 2
+//C++
+class Solution {
+public:
+    int distributeCandies(vector<int>& candies) {
+        set<int> s;
+        for(int c: candies){
+            s.insert(c);
+        }
+        return min(s.size(),candies.size()/2);
+    }
+};
+
+//Python
+class Solution:
+    def distributeCandies(self, candies: List[int]) -> int:
+        a=set(candies)
+        if len(a)>int(len(candies)/2): return int(len(candies)/2)
+        else: return len(a)

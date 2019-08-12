@@ -1,0 +1,46 @@
+//C++
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        vector<int> a(nums);
+        sort(a.begin(),a.end());   
+        bool flag=0;
+        int idx1,idx2;
+        for(int i=0;i<a.size();i++){
+            if(a[i]!=nums[i]){
+                flag=1;
+                idx1=i;
+                break;
+            }
+        }
+        if(!flag) return 0;
+        for(int j=a.size()-1;j>=0;j--){
+            if(a[j]!=nums[j]){
+                idx2=j;
+                break;
+            }
+        }
+        return idx2-idx1+1;
+    }
+};
+
+//Python
+class Solution:
+    def findUnsortedSubarray(self, nums: List[int]) -> int:
+        a=sorted(nums)
+        i=0
+        flag=0
+        while i<len(a):
+            if a[i]!=nums[i]:
+                flag=1
+                idx1=i
+                break
+            i+=1
+        if not flag: return 0
+        j=len(a)-1
+        while j>=0:
+            if a[j]!=nums[j]:
+                idx2=j
+                break
+            j-=1
+        return idx2-idx1+1

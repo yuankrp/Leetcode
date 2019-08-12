@@ -1,0 +1,25 @@
+//C++
+class Solution {
+public:
+    int maxCount(int m, int n, vector<vector<int>>& ops) {
+        int i=m,j=n;
+        for(vector<int> L: ops){
+            if(L[0] && L[1]){
+                if(L[0]<i) i=L[0];
+                if(L[1]<j) j=L[1];
+            }
+        }
+        return i*j;
+    }
+};
+
+//Python
+class Solution:
+    def maxCount(self, m: int, n: int, ops: List[List[int]]) -> int:
+        i=m
+        j=n
+        for L in ops:
+            if L[0] and L[1]:
+                if L[0]<i: i=L[0]
+                if L[1]<j: j=L[1]
+        return i*j

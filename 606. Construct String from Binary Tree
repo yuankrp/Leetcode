@@ -1,0 +1,45 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    string tree2str(TreeNode* t) {
+        if(!t) return "";
+        if(t->left && t->right){
+            return to_string(t->val)+"("+tree2str(t->left)+")"+"("+tree2str(t->right)+")";
+        }
+        if(t->left){
+            return to_string(t->val)+"("+tree2str(t->left)+")";
+        }
+        if(t->right){
+            return to_string(t->val)+"()"+"("+tree2str(t->right)+")";
+        }
+        else return to_string(t->val);
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def tree2str(self, t: TreeNode) -> str:
+        if not t: return ""
+        if t.left and t.right:
+            return str(t.val)+"("+self.tree2str(t.left)+")"+"("+self.tree2str(t.right)+")"
+        if t.left:
+            return str(t.val)+"("+self.tree2str(t.left)+")"
+        if t.right:
+            return str(t.val)+"()"+"("+self.tree2str(t.right)+")"
+        else: return str(t.val)

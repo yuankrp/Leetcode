@@ -1,0 +1,54 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<double> averageOfLevels(TreeNode* root) {
+        vector<double> res;
+        if(!root) return res;
+        vector<TreeNode*> L={root};
+        while(L.size()>0){
+            int s=L.size();
+            double a=0;
+            for(int i=0;i<s;i++){
+                a+=L[i]->val;
+                if(L[i]->left) L.push_back(L[i]->left);
+                if(L[i]->right) L.push_back(L[i]->right);
+            }
+            res.push_back(a/s);
+            L.erase(L.begin(),L.begin()+s);
+        }
+        return res;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
+        res=[]
+        if not root: return res
+        L=[root]
+        while len(L)>0:
+            s=len(L)
+            a=0
+            for i in range(s):
+                a+=L[i].val
+                if L[i].left: L.append(L[i].left)
+                if L[i].right: L.append(L[i].right)
+            res.append(a/s)
+            del L[0:s]
+        return res

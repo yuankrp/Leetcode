@@ -1,0 +1,24 @@
+//C++
+class Solution {
+public:
+    bool judgeSquareSum(int c) {
+        int i=0, j=sqrt(c);
+        while(i<=j){
+            if(c-j*j==i*i) return true;
+            else if(c-j*j<i*i) j--;
+            else i++;
+        }
+        return false;
+    }
+};
+
+//Python
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        i=0
+        j=int(math.sqrt(c))
+        while i<=j:
+            if i*i+j*j==c: return True
+            elif i*i+j*j>c: j-=1
+            else: i+=1
+        return False

@@ -1,0 +1,49 @@
+//C++
+class Solution {
+public:
+    vector<vector<int>> imageSmoother(vector<vector<int>>& M) {
+        if(M.empty() || M[0].empty()) return M;
+        int rows=M.size(),cols=M[0].size();
+        vector<vector<int>> res(M);
+        for(int r=0;r<rows;r++){
+            for(int c=0;c<cols;c++){
+                int s=0,n=0;
+                for(int i=-1;i<2;i++){
+                    for(int j=-1;j<2;j++){
+                        if(isValid(r+i,c+j,rows,cols)){
+                            s+=M[r+i][c+j];
+                            n++;
+                        }
+                    }
+                }
+                res[r][c]=s/n;
+            }
+        }
+        return res;
+    }
+    
+    bool isValid(int i, int j, int rows, int cols) {
+        if(i>=0 && i<rows && j>=0 && j<cols) return true;
+        else return false;
+    }
+};
+
+//Python
+class Solution:
+    def imageSmoother(self, M: List[List[int]]) -> List[List[int]]:
+        if not M or not M[0]: return M
+        rows=len(M)
+        cols=len(M[0])
+        isValid= lambda i,j: i>=0 and i<rows and j>=0 and j<cols
+        res=copy.deepcopy(M)
+        for r in range(rows):
+            for c in range(cols):
+                s=0
+                n=0
+                for i in range(-1,2):
+                    for j in range(-1,2):
+                        if isValid(r+i,c+j):
+                            s+=M[r+i][c+j]
+                            n+=1
+                res[r][c]=int(s/n)
+        return res

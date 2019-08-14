@@ -1,0 +1,48 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool findTarget(TreeNode* root, int k) {
+        if(!root) return false;
+        vector<int> s;
+        vector<TreeNode*> L{root};
+        while(L.size()>0){
+            TreeNode* p=L.back();
+            L.pop_back();
+            if(find(s.begin(),s.end(),k-p->val)!=s.end()) return true;
+            else s.push_back(p->val);
+            if(p->left) L.push_back(p->left);
+            if(p->right) L.push_back(p->right);
+        }
+        return false;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        if not root: return False
+        s=[]
+        L=[root]
+        while len(L)>0:
+            p=L.pop()
+            if k-p.val in s: return True
+            else: s.append(p.val)
+            if p.left: L.append(p.left)
+            if p.right: L.append(p.right)
+        return False

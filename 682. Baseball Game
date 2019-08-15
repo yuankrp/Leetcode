@@ -1,0 +1,25 @@
+//C++
+class Solution {
+public:
+    int calPoints(vector<string>& ops) {
+        vector<int> L;
+        for(string s: ops){
+            if(s=="C") L.pop_back();
+            else if (s=="D") L.push_back(2*L.back());
+            else if (s=="+") L.push_back(L.back()+L[L.size()-2]);
+            else L.push_back(stoi(s.c_str()));
+        }
+        return accumulate(L.begin(),L.end(),0);
+    }
+};
+
+//Python
+class Solution:
+    def calPoints(self, ops: List[str]) -> int:
+        L=[]
+        for n in ops:
+            if n=="C": L.pop()
+            elif n=="D": L.append(2*L[-1])
+            elif n=="+": L.append(L[-1]+L[len(L)-2])
+            else: L.append(int(n))
+        return sum(L)

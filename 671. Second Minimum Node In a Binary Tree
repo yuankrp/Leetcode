@@ -1,0 +1,54 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int findSecondMinimumValue(TreeNode* root) {
+        if(!root) return -1;
+        vector<TreeNode*> L={root};
+        set<int> nums;
+        while(L.size()>0){
+            TreeNode* p=L.back();
+            L.pop_back();
+            nums.insert(p->val);
+            if(p->left) L.push_back(p->left);
+            if(p->right) L.push_back(p->right);
+        }
+        if(nums.size()==1) return -1;
+        else{
+            set<int>::iterator it=nums.begin();
+            it++;
+            return *it;
+        }
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def findSecondMinimumValue(self, root: TreeNode) -> int:
+        if not root: return -1
+        L=[root]
+        nums=set()
+        while len(L)>0:
+            p=L.pop()
+            nums.add(p.val)
+            if p.left: L.append(p.left)
+            if p.right: L.append(p.right)
+        nums=list(nums)
+        nums.sort()
+        if len(nums)==1: return -1
+        else: return nums[1]

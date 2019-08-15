@@ -1,0 +1,56 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+private:
+    int max_p;
+public:
+    int longestUnivaluePath(TreeNode* root) {
+        countPath(root);
+        return max_p;
+    }
+    
+    int countPath(TreeNode* root) {
+        if(!root) return 0;
+        int a=countPath(root->left);
+        int b=countPath(root->right);
+        int l=0,r=0;
+        if (root->left && root->val==root->left->val) l=1+a;
+        if (root->right && root->val==root->right->val) r=1+b;
+        max_p=max(max_p,l+r);
+        return max(l,r);
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def longestUnivaluePath(self, root: TreeNode) -> int:
+        self.max_p=0
+        def countPath(root: TreeNode) -> int:
+            if not root: return 0
+            a=countPath(root.left)
+            b=countPath(root.right)
+            l=0
+            r=0
+            if root.left and root.val==root.left.val:
+                l=1+a
+            if root.right and root.val==root.right.val:
+                r=1+b
+            self.max_p=max(self.max_p,l+r)
+            return max(l,r)
+        countPath(root)
+        return self.max_p

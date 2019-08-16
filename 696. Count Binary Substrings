@@ -1,0 +1,28 @@
+//C++
+class Solution {
+public:
+    int countBinarySubstrings(string s) {
+        vector<int> L={1};
+        for(int i=1;i<s.length();i++){
+            if(s[i]!=s[i-1]) L.push_back(1);
+            else L[L.size()-1]++;
+        }
+        int res=0;
+        for(int i=1;i<L.size();i++){
+            res+=min(L[i-1],L[i]);
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def countBinarySubstrings(self, s: str) -> int:
+        L=[1]
+        for i in range(1,len(s)):
+            if s[i]!=s[i-1]: L.append(1)
+            else: L[-1]+=1
+        res=0
+        for i in range(1,len(L)):
+            res+=min(L[i-1],L[i])
+        return res

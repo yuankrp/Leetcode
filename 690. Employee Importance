@@ -1,0 +1,67 @@
+//C++
+/*
+// Employee info
+class Employee {
+public:
+    // It's the unique ID of each node.
+    // unique id of this employee
+    int id;
+    // the importance value of this employee
+    int importance;
+    // the id of direct subordinates
+    vector<int> subordinates;
+};
+*/
+class Solution {
+public:
+    map<int,Employee*> imap;
+    
+    int getImportance(vector<Employee*> employees, int id) {
+        for(Employee* E: employees){
+            imap[E->id]=E;
+        }
+        return dfs(id);
+    }
+    
+    int dfs(int id) {
+        Employee* E=imap[id];
+        int s=E->importance;
+        for(int i: E->subordinates){
+            s+=dfs(i);
+        }
+        return s;
+    }
+};
+
+//Python
+"""
+# Employee info
+class Employee:
+    def __init__(self, id, importance, subordinates):
+        # It's the unique id of each node.
+        # unique id of this employee
+        self.id = id
+        # the importance value of this employee
+        self.importance = importance
+        # the id of direct subordinates
+        self.subordinates = subordinates
+"""
+class Solution:
+    def getImportance(self, employees, id):
+        """
+        :type employees: Employee
+        :type id: int
+        :rtype: int
+        """
+        s=set()
+        L=[id]
+        while len(L)>0:
+            p=L.pop()
+            s.add(p)
+            for E in employees:
+                if E.id==p: L+=E.subordinates
+        v=0
+        for E in employees:
+            if E.id in s:
+                v+=E.importance
+        return v

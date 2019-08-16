@@ -1,0 +1,38 @@
+//C++
+class Solution {
+public:
+    int findShortestSubArray(vector<int>& nums) {
+        map<int,int> D,L,R;
+        int m=0;
+        for(int i=0;i<nums.size();i++){
+            D[nums[i]]++;
+            R[nums[i]]=i;
+            if(L.find(nums[i])==L.end()) L[nums[i]]=i;
+            m=max(m,D[nums[i]]);
+        }
+        int res=nums.size();
+        for(auto &item: D){
+            if(item.second==m) res=min(res,R[item.first]-L[item.first]+1);
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        D={}
+        L={}
+        R={}
+        for i in range(len(nums)):
+            if nums[i] in D: D[nums[i]]+=1
+            else: D[nums[i]]=1
+            if nums[i] not in L: L[nums[i]]=i
+            R[nums[i]]=i
+        m=max(D.values())
+        res=len(nums)
+        for k in D:
+            if D[k]==m:
+                res=min(res,R[k]-L[k]+1)
+        return res
+        

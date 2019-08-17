@@ -1,0 +1,70 @@
+//C++
+class MyHashSet {
+private:
+    vector<int> L;
+public:
+    /** Initialize your data structure here. */
+    MyHashSet() {
+        
+    }
+    
+    void add(int key) {
+        if(find(L.begin(),L.end(),key)==L.end()) L.push_back(key);
+    }
+    
+    void remove(int key) {
+        for(int i=0;i<L.size();i++){
+            if(L[i]==key){
+                L.erase(L.begin()+i);
+                break;
+            }
+        }
+    }
+    
+    /** Returns true if this set contains the specified element */
+    bool contains(int key) {
+        if(find(L.begin(),L.end(),key)!=L.end()) return true;
+        else return false;
+    }
+};
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet* obj = new MyHashSet();
+ * obj->add(key);
+ * obj->remove(key);
+ * bool param_3 = obj->contains(key);
+ */
+ 
+ //Python
+ class MyHashSet:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.L=[]
+
+    def add(self, key: int) -> None:
+        if key not in self.L:
+            self.L.append(key)
+
+    def remove(self, key: int) -> None:
+        if key in self.L:
+            self.L.remove(key)
+
+    def contains(self, key: int) -> bool:
+        """
+        Returns true if this set contains the specified element
+        """
+        if key in self.L: return True
+        else: return False
+            
+        
+
+
+# Your MyHashSet object will be instantiated and called as such:
+# obj = MyHashSet()
+# obj.add(key)
+# obj.remove(key)
+# param_3 = obj.contains(key)

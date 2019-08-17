@@ -1,0 +1,21 @@
+//C++
+class Solution {
+public:
+    string toLowerCase(string str) {
+        for (char &c : str){
+            if (c >= 'A' && c <= 'Z') c = c - 'A' + 'a';
+        }
+        return str;
+    }
+};
+
+//Python
+class Solution:
+    def toLowerCase(self, str: str) -> str:
+        res = ""
+        for s in str:
+            if ord(s) >= ord('A') and ord(s) <= ord('Z'):
+                res += chr(ord(s) - ord('A') + ord('a'))
+            else:
+                res += s
+        return res

@@ -1,0 +1,38 @@
+//C++
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int color=image[sr][sc];
+        if (color==newColor) return image;
+        vector<vector<int>> L{{sr,sc}};
+        int row=image.size();
+        int col=image[0].size();
+        while(!L.empty()){
+            vector<int> p=L.back();
+            L.pop_back();
+            image[p[0]][p[1]]=newColor;
+            if (p[1]-1>=0 && image[p[0]][p[1]-1]==color) L.push_back({p[0],p[1]-1});
+            if (p[1]+1<col && image[p[0]][p[1]+1]==color) L.push_back({p[0],p[1]+1});
+            if (p[0]-1>=0 && image[p[0]-1][p[1]]==color) L.push_back({p[0]-1,p[1]});
+            if (p[0]+1<row && image[p[0]+1][p[1]]==color) L.push_back({p[0]+1,p[1]});
+        }
+        return image;
+    }
+};
+
+//Python
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        color=image[sr][sc]
+        if color==newColor: return image
+        L=[[sr,sc]]
+        row=len(image)
+        col=len(image[0])
+        while len(L)>0:
+            p=L.pop()
+            image[p[0]][p[1]]=newColor
+            if p[1]-1>=0 and image[p[0]][p[1]-1]==color: L.append([p[0],p[1]-1])
+            if p[1]+1<col and image[p[0]][p[1]+1]==color: L.append([p[0],p[1]+1])
+            if p[0]-1>=0 and image[p[0]-1][p[1]]==color: L.append([p[0]-1,p[1]])
+            if p[0]+1<row and image[p[0]+1][p[1]]==color: L.append([p[0]+1,p[1]])
+        return image

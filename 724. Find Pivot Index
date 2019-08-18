@@ -1,0 +1,23 @@
+//C++
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int s=accumulate(nums.begin(),nums.end(),0);
+        int left=0;
+        for(int i=0;i<nums.size();i++){
+            if(left==s-left-nums[i]) return i;
+            else left+=nums[i];
+        }
+        return -1;
+    }
+};
+
+//Python
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        s=sum(nums)
+        left=0
+        for i in range(len(nums)):
+            if left==s-left-nums[i]: return i
+            else: left+=nums[i]
+        return -1

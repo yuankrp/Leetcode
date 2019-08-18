@@ -1,0 +1,19 @@
+//C++
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        sort(letters.begin(),letters.end());
+        for(char c: letters){
+            if(c>target) return c;
+        }
+        return letters[0];
+    }
+};
+
+//Python
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        letters.sort()
+        for s in letters:
+            if s>target: return s 
+        return letters[0]

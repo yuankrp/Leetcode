@@ -1,0 +1,32 @@
+//C++
+class Solution {
+public:
+    vector<int> selfDividingNumbers(int left, int right) {
+        vector<int> L;
+        for(int i=left;i<=right;i++){
+            int a=i,b;
+            bool flag=1;
+            while(a>0){
+                b=a%10;
+                if(b==0 || i%b!=0) flag=0;
+                a=a/10;
+            }
+            if(flag) L.push_back(i);
+        }
+        return L;
+    }
+};
+
+//Python
+class Solution:
+    def selfDividingNumbers(self, left: int, right: int) -> List[int]:
+        L=[]
+        for n in range(left,right+1):
+            a=n
+            flag=1
+            while a>0:
+                b=a%10
+                if b==0 or n%b!=0: flag=0
+                a=a//10
+            if flag: L.append(n)
+        return L

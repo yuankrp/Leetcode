@@ -1,0 +1,31 @@
+//C++
+class Solution {
+public:
+    int countPrimeSetBits(int L, int R) {
+        vector<int> P={2,3,5,7,11,13,17,19,23,29,31};
+        int res=0,s,a;
+        for(int n=L;n<=R;n++){
+            s=0;
+            a=n;
+            while(a>0){
+                if(a&1==1) s++;
+                a=a>>1;
+            }
+            if(find(P.begin(),P.end(),s)!=P.end()) res++;
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def countPrimeSetBits(self, L: int, R: int) -> int:
+        P=[2,3,5,7,11,13,17,19,23,29,31]
+        res=0
+        for n in range(L,R+1):
+            s=0
+            while n>0:
+                if n&1==1: s+=1
+                n=n>>1
+            if s in P: res+=1
+        return res

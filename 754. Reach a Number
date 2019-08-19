@@ -1,0 +1,25 @@
+//C++
+class Solution {
+public:
+    int reachNumber(int target) {
+        target=abs(target);
+        int n=sqrt(target*2);
+        while(n*(n+1)/2<target) n++;
+        int s=n*(n+1)/2;
+        if (s==target || (s-target)%2==0) return n;
+        else if (n%2==0) return n+1;
+        else return n+2;
+    }
+};
+
+//Python
+class Solution:
+    def reachNumber(self, target: int) -> int:
+        target=abs(target)
+        n=int(math.sqrt(target*2))
+        while n*(n+1)//2<target:
+            n+=1
+        s=n*(n+1)//2
+        if s==target or (s-target)%2==0: return n
+        elif n%2==0: return n+1
+        else: return n+2

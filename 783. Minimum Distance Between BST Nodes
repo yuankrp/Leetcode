@@ -1,0 +1,59 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int minDiffInBST(TreeNode* root) {
+        if(!root || (!root->left && !root->right)) return 0;
+        vector<TreeNode*> L;
+        int res=INT_MAX,base=0;
+        TreeNode* p=root;
+        while(!L.empty() || p){
+            if(p){
+                L.push_back(p);
+                p=p->left;
+            }
+            else{
+                p=L.back();
+                L.pop_back();
+                if(base>0) res=min(p->val-base,res);
+                base=p->val;
+                p=p->right;
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def minDiffInBST(self, root: TreeNode) -> int:
+        if not root or (not root.left and not root.right): return 0
+        L=[]
+        res=sys.maxsize
+        base=0
+        p=root
+        while len(L)>0 or p:
+            if p:
+                L.append(p)
+                p=p.left
+            else:
+                p=L.pop()
+                if base: res=min(p.val-base,res)
+                base=p.val
+                p=p.right
+        return res

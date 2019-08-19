@@ -1,0 +1,51 @@
+//C++
+class Solution {
+public:
+    string shortestCompletingWord(string licensePlate, vector<string>& words) {
+        
+        transform(licensePlate.begin(), licensePlate.end(), licensePlate.begin(),::tolower);
+        map<char,int> imap;
+        for(int i=0;i<licensePlate.length();i++){
+            if(isalpha(licensePlate[i])) imap[licensePlate[i]]++;
+        }
+        map<char,int>::iterator p;
+        vector<string> L;
+        for(string w: words){
+            bool flag=0;
+            for(auto it: imap){
+                if(count(w.begin(),w.end(),it.first)<it.second) flag=1;
+            }
+            if(flag) continue;
+            else{
+                if(L.empty()) L.push_back(w);
+                if(L[0].length()>w.length()){
+                    L.pop_back();
+                    L.push_back(w);
+                }
+            }
+        }
+        return L[0];
+    }
+};
+
+//Python
+class Solution:
+    def shortestCompletingWord(self, licensePlate: str, words: List[str]) -> str:
+        s=licensePlate.lower()
+        D={}
+        for i in range(len(s)):
+            if s[i:i+1].isalpha():
+                if s[i] in D: D[s[i]]+=1
+                else: D[s[i]]=1
+        L=[]
+        for w in words:
+            flag=0
+            for k,v in D.items():
+                if w.count(k)<v: flag=1
+            if flag: continue
+            else:
+                if len(L)==0: L.append(w)
+                elif len(L[0])>len(w):
+                    L.pop()
+                    L.append(w)
+        return L[0]

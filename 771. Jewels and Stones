@@ -1,0 +1,19 @@
+//C++
+class Solution {
+public:
+    int numJewelsInStones(string J, string S) {
+        int s=0;
+        for(auto c: S){
+            if(J.find(c)!=J.npos) s++;
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        s=0
+        for i in range(len(S)):
+            if S[i] in J: s+=1
+        return s

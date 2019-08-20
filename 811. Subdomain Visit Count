@@ -1,0 +1,40 @@
+//C++
+class Solution {
+public:
+    vector<string> subdomainVisits(vector<string>& cpdomains) {
+        map<string,int> D;
+        for(string s: cpdomains){
+            int i=s.find(" ")+1;
+            int n=stoi(s.substr(0,i-1));
+            D[s.substr(i,s.length()-i)]+=n;
+            while(i<s.length()){
+                if(s[i]=='.') D[s.substr(i+1,s.length()-i)]+=n;
+                i++;
+            }
+        }
+        vector<string> res;
+        for(auto it: D){
+            res.push_back(to_string(it.second)+" "+it.first);
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        D={}
+        for s in cpdomains:
+            i=s.index(' ')+1
+            n=int(s[0:i-1])
+            if s[i:len(s)] in D: D[s[i:len(s)]]+=n
+            else: D[s[i:len(s)]]=n
+            while i<len(s):
+                if s[i]=='.':
+                    if s[i+1:len(s)] in D: D[s[i+1:len(s)]]+=n
+                    else: D[s[i+1:len(s)]]=n
+                i+=1
+        res=[]
+        for k,v in D.items():
+            res.append(str(v)+" "+k)
+        return res

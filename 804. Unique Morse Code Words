@@ -1,0 +1,28 @@
+//C++
+class Solution {
+public:
+    int uniqueMorseRepresentations(vector<string>& words) {
+        vector<string> morse={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        set<string> mset;
+        for(string s: words){
+            string m;
+            for(char c:s){
+                m+=morse[c-'a'];
+            }
+            mset.insert(m);
+        }
+        return mset.size();
+    }
+};
+
+//Python
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        morse=[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+        mset=set([])
+        for s in words:
+            m=""
+            for n in s:
+                m+=morse[ord(n)-ord('a')]
+            mset.add(m)
+        return len(mset)

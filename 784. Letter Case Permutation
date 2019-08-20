@@ -1,0 +1,41 @@
+//C++
+class Solution {
+public:
+    vector<string> letterCasePermutation(string S) {
+        vector<string> res;
+        dfs(S,0,res,"");
+        return res;
+    }
+    
+    void dfs(string S,int idx,vector<string> &res,string path) {
+        if(idx==S.length()){
+            res.push_back(path);
+            return;
+        }
+        else{
+            if(isalpha(S[idx])){
+                dfs(S,idx+1,res,path+(char)toupper(S[idx]));
+                dfs(S,idx+1,res,path+(char)tolower(S[idx]));
+            }
+            else dfs(S,idx+1,res,path+S[idx]);
+        }
+    }
+};
+
+//Python
+class Solution:
+    def letterCasePermutation(self, S: str) -> List[str]:
+        res=[]
+        self.dfs(S,0,res,"")
+        return res
+    
+    def dfs(self, S: str, idx: int, res: List[str], path: str):
+        if idx==len(S): 
+            res.append(path)
+            return
+        else:
+            if S[idx].isalpha():
+                self.dfs(S,idx+1,res,path+S[idx].lower())
+                self.dfs(S,idx+1,res,path+S[idx].upper())
+            else:
+                self.dfs(S,idx+1,res,path+S[idx])

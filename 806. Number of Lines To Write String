@@ -1,0 +1,30 @@
+//C++
+class Solution {
+public:
+    vector<int> numberOfLines(vector<int>& widths, string S) {
+        int w=0;
+        vector<int> L={1,0};
+        for(char s: S){
+            if(w+widths[s-'a']>100){
+                w=0;
+                L[0]+=1;
+            }
+            w+=widths[s-'a'];
+            L[1]=w;
+        }
+        return L;
+    }
+};
+
+//python
+class Solution:
+    def numberOfLines(self, widths: List[int], S: str) -> List[int]:
+        w=0
+        L=[1,0]
+        for s in S:
+            if w+widths[ord(s)-ord('a')]>100:
+                w=0
+                L[0]+=1
+            w+=widths[ord(s)-ord('a')]
+            L[1]=w
+        return L

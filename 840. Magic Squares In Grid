@@ -1,0 +1,68 @@
+//C++
+class Solution {
+public:
+    int numMagicSquaresInside(vector<vector<int>>& grid) {
+        if(grid.size()<3 || grid[0].size()<3) return 0;
+        int r=grid.size(),c=grid[0].size(),s=0;
+        for(int i=0;i<r-2;i++){
+            for(int j=0;j<c-2;j++){
+                if(isValid(grid,i,j)) s++;
+            }
+        }
+        return s;
+    }
+    
+    bool isValid(vector<vector<int>>& grid, int r, int c) {
+        set<int> L;
+        for(int i=r;i<r+3;i++){
+            for(int j=c;j<c+3;j++){
+                if(grid[i][j]>=1 && grid[i][j]<=9) L.insert(grid[i][j]);
+                else return false;
+            }
+        }
+        if(L.size()<9) return false;
+        if(accumulate(grid[r].begin()+c,grid[r].begin()+c+3,0)!=
+           accumulate(grid[r+1].begin()+c,grid[r+1].begin()+c+3,0)) return false;
+        else if(accumulate(grid[r+1].begin()+c,grid[r+1].begin()+c+3,0)!=
+            accumulate(grid[r+2].begin()+c,grid[r+2].begin()+c+3,0)) return false;
+        else if(accumulate(grid[r+2].begin()+c,grid[r+2].begin()+c+3,0)!=
+            grid[r][c]+grid[r+1][c]+grid[r+2][c]) return false;
+        else if(grid[r][c+1]+grid[r+1][c+1]+grid[r+2][c+1]!=
+            grid[r][c]+grid[r+1][c]+grid[r+2][c]) return false;
+        else if(grid[r][c+1]+grid[r+1][c+1]+grid[r+2][c+1]!=
+            grid[r][c+2]+grid[r+1][c+2]+grid[r+2][c+2]) return false;
+        else if(grid[r][c]+grid[r+1][c+1]+grid[r+2][c+2]!=
+            grid[r][c+2]+grid[r+1][c+2]+grid[r+2][c+2]) return false;
+        else if(grid[r][c]+grid[r+1][c+1]+grid[r+2][c+2]!=
+            grid[r+2][c]+grid[r+1][c+1]+grid[r][c+2]) return false;
+        else return true;
+    }
+};
+
+//Python
+class Solution:
+    def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
+        if len(grid)<3 or len(grid[0])<3: return 0
+        r=len(grid)
+        c=len(grid[0])
+        s=0
+        for i in range(r-2):
+            for j in range(c-2):
+                if(self.isValid(grid,i,j)): s+=1
+        return s
+    
+    def isValid(self, grid: List[List[int]], r: int, c:int) -> bool:
+        L=[]
+        for i in grid[r:r+3]:
+            for j in i[c:c+3]:
+                if j>=1 and j<=9: L.append(j)
+        S=set(L)
+        if len(S)<9: return False
+        if sum(grid[r][c:c+3])!=sum(grid[r+1][c:c+3]): return False
+        elif sum(grid[r+1][c:c+3])!=sum(grid[r+2][c:c+3]): return False
+        elif sum(grid[r+2][c:c+3])!=grid[r][c]+grid[r+1][c]+grid[r+2][c]: return False
+        elif grid[r][c]+grid[r+1][c]+grid[r+2][c]!=grid[r][c+1]+grid[r+1][c+1]+grid[r+2][c+1]: return False
+        elif grid[r][c+2]+grid[r+1][c+2]+grid[r+2][c+2]!=grid[r][c+1]+grid[r+1][c+1]+grid[r+2][c+1]: return False
+        elif grid[r][c+2]+grid[r+1][c+2]+grid[r+2][c+2]!=grid[r][c]+grid[r+1][c+1]+grid[r+2][c+2]: return False
+        elif grid[r][c]+grid[r+1][c+1]+grid[r+2][c+2]!=grid[r+2][c]+grid[r+1][c+1]+grid[r][c+2]: return False
+        else: return True

@@ -1,0 +1,39 @@
+//C++
+class Solution {
+public:
+    string toGoatLatin(string S) {
+        istringstream iss(S);
+        string t="",res="",A="aeiouAEIOU",a="";
+        bool flag=1;
+        while(iss >> t){
+            a+="a";
+            if(A.find(t[0])!=A.npos){
+                if(flag){
+                    res+=t+"ma"+a;
+                    flag=0;
+                }
+                else res+=" "+t+"ma"+a;
+            }
+            else{
+                if(flag){
+                    res+=t.substr(1)+t.substr(0,1)+"ma"+a;
+                    flag=0;
+                }
+                else res+=" "+t.substr(1)+t.substr(0,1)+"ma"+a;
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def toGoatLatin(self, S: str) -> str:
+        L=S.split()
+        res=[]
+        for i in range(len(L)):
+            if L[i][0] in "aeiouAEIOU":
+                res.append(L[i]+"ma"+"a"*(i+1))
+            else:
+                res.append(L[i][1:]+L[i][0]+"ma"+"a"*(i+1))
+        return " ".join(res)

@@ -1,0 +1,22 @@
+//C++
+class Solution {
+public:
+    vector<vector<int>> flipAndInvertImage(vector<vector<int>>& A) {
+        for(vector<int> &L: A){
+            reverse(L.begin(),L.end());
+            for(int i=0;i<L.size();i++){
+                L[i]=(L[i]+1)&1;
+            }
+        }
+        return A;
+    }
+};
+
+//Python
+class Solution:
+    def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
+        for L in A:
+            L.reverse()
+            for i in range(len(L)):
+                L[i]=(L[i]+1)&1
+        return A

@@ -1,0 +1,16 @@
+//C++
+class Solution {
+public:
+    bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {
+        bool a=rec1[0]>rec2[2] && rec1[1]>rec2[3] && rec1[2]<rec2[0] && rec1[3]<rec2[1];
+        bool b=rec1[0]<rec2[2] && rec1[1]<rec2[3] && rec1[2]>rec2[0] && rec1[3]>rec2[1];
+        return a || b;
+    }
+};
+
+//Python
+class Solution:
+    def isRectangleOverlap(self, rec1: List[int], rec2: List[int]) -> bool:
+        a=rec1[0]>rec2[2] and rec1[1]>rec2[3] and rec1[2]<rec2[0] and rec1[3]<rec2[1]
+        b=rec1[0]<rec2[2] and rec1[1]<rec2[3] and rec1[2]>rec2[0] and rec1[3]>rec2[1]
+        return a or b

@@ -1,0 +1,51 @@
+//C++
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills) {
+        int fi=0,ten=0;
+        for(int n: bills){
+            if(n==5) fi++;
+            else if(n==10){
+                if(fi>0){
+                    ten++;
+                    fi--;
+                }
+                else return false;
+            }
+            else{
+                if(ten>0){
+                    if(fi>0){
+                        ten--;
+                        fi--;
+                    }
+                    else return false;
+                }
+                else if(fi>=3) fi-=3;
+                else return false;
+            }
+        }
+        return true;
+    }
+};
+
+//Python
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        fi=0
+        ten=0
+        for n in bills:
+            if n==5: fi+=1
+            elif n==10:
+                if fi>0:
+                    ten+=1
+                    fi-=1
+                else: return False
+            else:
+                if ten>0:
+                    if fi>0:
+                        ten-=1
+                        fi-=1
+                    else: return False
+                elif fi>=3: fi-=3
+                else: return False
+        return True

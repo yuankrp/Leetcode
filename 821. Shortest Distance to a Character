@@ -1,0 +1,46 @@
+//C++
+class Solution {
+public:
+    vector<int> shortestToChar(string S, char C) {
+        vector<int> L(S.length(),0);
+        vector<int> R;
+        for(int i=0;i<S.length();i++){
+            if(S[i]==C) R.insert(R.begin(),i);
+        }
+        int t1=-1,t2=-1;
+        while(R.size()>0){
+            t1=t2;
+            t2=R.back();
+            R.pop_back();
+            for(int i=t1+1;i<t2;i++){
+                if(t1>=0) L[i]=min(t2-i,i-t1);
+                else L[i]=t2-i;
+            }
+        }
+        for(int i=t2+1;i<S.length();i++){
+            L[i]=i-t2;
+        }
+        return L;
+    }
+};
+
+//Python
+class Solution:
+    def shortestToChar(self, S: str, C: str) -> List[int]:
+        L=[0]*len(S)
+        R=[]
+        for i in range(len(S)):
+            if S[i]==C:
+                R.insert(0,i)    
+        t1=-1
+        t2=-1
+        while len(R)>0:
+            t1=t2
+            t2=R.pop()
+            for i in range(t1+1,t2):
+                if t1>=0: L[i]=min(t2-i,i-t1)
+                else: L[i]=t2-i
+        for i in range(t2+1,len(S)):
+            L[i]=i-t2
+        return L
+        

@@ -1,0 +1,41 @@
+//C++
+class Solution {
+public:
+    string mostCommonWord(string paragraph, vector<string>& banned) {
+        map<string,int> D;
+        int n=0;
+        for(char &c: paragraph){
+            if(isalpha(c)) c=tolower(c);
+            else c=' ';
+        }
+        istringstream iss(paragraph);
+        string t = "", res = "";
+        while (iss >> t) {
+            if(find(banned.begin(),banned.end(),t)!=banned.end()) continue;
+            else D[t]+=1;
+            if(D[t]>n){
+                res=t;
+                n=D[t];
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        paragraph=paragraph.lower()
+        str_list="".join((c if c.isalpha() else " ") for c in paragraph).split()
+        D={}
+        res=""
+        n=0
+        for s in str_list:
+            if s in banned: continue
+            elif s in D: D[s]+=1
+            else: D[s]=1
+            if D[s]>n:
+                res=s
+                n=D[s]
+        return res
+                

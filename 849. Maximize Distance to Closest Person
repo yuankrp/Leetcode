@@ -1,0 +1,46 @@
+//C++
+class Solution {
+public:
+    int maxDistToClosest(vector<int>& seats) {
+        int s=0,c=0,n;
+        bool flag=1;
+        while(seats.size()>0){
+            n=seats.back();
+            seats.pop_back();
+            if(n==0) c++;
+            else{
+                if(flag){
+                    s=max(s,c);
+                    flag=0;
+                    c=0;
+                }
+                else{
+                    s=max(s,(c+1)/2);
+                    c=0;
+                }
+            }
+        }
+        s=max(s,c);
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def maxDistToClosest(self, seats: List[int]) -> int:
+        s=0
+        c=0
+        flag=1
+        while len(seats)>0:
+            n=seats.pop()
+            if n==0: c+=1
+            else:
+                if flag:
+                    s=max(s,c)
+                    flag=0
+                    c=0
+                else:
+                    s=max(s,(c+1)//2)
+                    c=0
+        s=max(s,c)
+        return s

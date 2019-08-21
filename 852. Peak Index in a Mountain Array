@@ -1,0 +1,14 @@
+//C++
+class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& A) {
+        auto mP = max_element(A.begin(), A.end());
+        return mP-A.begin();
+    }
+};
+
+//Python
+class Solution:
+    def peakIndexInMountainArray(self, A: List[int]) -> int:
+        s=max(A)
+        return A.index(s)

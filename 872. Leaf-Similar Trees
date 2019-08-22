@@ -1,0 +1,49 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        vector<int> L1,L2;
+        dfs(root1,L1);
+        dfs(root2,L2);
+        return L1==L2;
+    }
+    
+    void dfs(TreeNode* root, vector<int> &L){
+        if(root==NULL) return;
+        if(root->left==NULL && root->right==NULL) L.push_back(root->val);
+        dfs(root->left,L);
+        dfs(root->right,L);
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
+        L1=[]
+        L2=[]
+        self.dfs(root1,L1)
+        self.dfs(root2,L2)
+        if L1==L2: return True
+        else: return False
+        
+    def dfs(self, root: TreeNode, L: List[int]):
+        if not root: return
+        if not root.left and not root.right: L.append(root.val)
+        self.dfs(root.left,L)
+        self.dfs(root.right,L)

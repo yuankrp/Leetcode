@@ -1,0 +1,41 @@
+//C++
+class Solution {
+public:
+    int projectionArea(vector<vector<int>>& grid) {
+        int A=0,m=0,n=0;
+        for(auto L: grid){
+            auto maxPosition = max_element(L.begin(), L.end());
+            A+=L[maxPosition-L.begin()];
+            n=L.size();
+            m=max(m,n);
+            for(auto x: L){
+                if(x>0) A++;
+            }
+        }
+        for(int i=0;i<m;i++){
+            int c=0;
+            for(int j=0;j<grid.size();j++){
+                if(i<grid[j].size()) c=max(c,grid[j][i]);
+            }
+            A+=c;
+        }
+        return A;
+    }
+};
+
+//Python
+class Solution:
+    def projectionArea(self, grid: List[List[int]]) -> int:
+        A=0
+        m=0
+        for L in grid:
+            A+=max(L)
+            m=max(m,len(L))
+            for x in L:
+                if x: A+=1
+        for i in range(m):
+            c=0
+            for j in range(len(grid)):
+                if i<len(grid[j]): c=max(c,grid[j][i])
+            A+=c
+        return A

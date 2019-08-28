@@ -1,0 +1,21 @@
+//C++
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& A) {
+        vector<int> L;
+        for(int n: A){
+            if(n%2==0) L.insert(L.begin(),n);
+            else L.push_back(n);
+        }
+        return L;
+    }
+};
+
+//Python
+class Solution:
+    def sortArrayByParity(self, A: List[int]) -> List[int]:
+        L=[]
+        for n in A:
+            if n%2==0: L.insert(0,n)
+            else: L.append(n)
+        return L

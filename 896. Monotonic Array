@@ -1,0 +1,18 @@
+//C++
+class Solution {
+public:
+    bool isMonotonic(vector<int>& A) {
+        vector<int> a(A),b(A);
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        reverse(a.begin(),a.end());
+        if(A==a || A==b) return true;
+        else return false;
+    }
+};
+
+//Python
+class Solution:
+    def isMonotonic(self, A: List[int]) -> bool:
+        if A==sorted(A) or A==list(reversed(sorted(A))): return True
+        else: return False

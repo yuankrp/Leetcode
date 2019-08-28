@@ -1,0 +1,68 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* increasingBST(TreeNode* root) {
+        if(!root) return root;
+        vector<TreeNode*> L;
+        TreeNode *p,*q,*newRoot,*r;
+        p=root;
+        vector<int> newL;
+        while(!L.empty() || p){
+            if(p){
+                L.push_back(p);
+                p=p->left;
+            }
+            else{
+                q=L.back();
+                L.pop_back();
+                newL.push_back(q->val);
+                p=q->right;
+            }
+        }
+        newRoot=new TreeNode(newL[0]);
+        r=newRoot;
+        for(int i=1;i<newL.size();i++){
+            r->right=new TreeNode(newL[i]);
+            r=r->right;
+        }
+        return newRoot;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def increasingBST(self, root: TreeNode) -> TreeNode:
+        if not root: return root
+        L=[]
+        p=root
+        newL=[]
+        while len(L)>0 or p:
+            if p:
+                L.append(p)
+                p=p.left
+            else:
+                q=L.pop()
+                newL.append(q.val)
+                p=q.right
+        newRoot=TreeNode(newL[0])
+        r=newRoot
+        for i in range(1,len(newL)):
+            r.right=TreeNode(newL[i])
+            r=r.right
+        return newRoot

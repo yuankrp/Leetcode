@@ -1,0 +1,26 @@
+//C++
+class Solution {
+public:
+    vector<int> fairCandySwap(vector<int>& A, vector<int>& B) {
+        int sa=accumulate(A.begin(),A.end(),0);
+        int sb=accumulate(B.begin(),B.end(),0);
+        vector<int> ans;
+        for(auto a: A){
+            if(find(B.begin(),B.end(),a+(sb-sa)/2)!=B.end()){
+                ans.push_back(a);
+                ans.push_back(a+(sb-sa)/2);
+                break;
+            }
+        }
+        return ans;
+    }
+};
+
+//Python
+class Solution:
+    def fairCandySwap(self, A: List[int], B: List[int]) -> List[int]:
+        sa=sum(A)
+        sb=sum(B)
+        setB=set(B)
+        for a in A:
+            if a+(sb-sa)//2 in setB: return [a,a+(sb-sa)//2]

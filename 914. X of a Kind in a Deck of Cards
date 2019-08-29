@@ -1,0 +1,42 @@
+//C++
+class Solution {
+public:
+    bool hasGroupsSizeX(vector<int>& deck) {
+        map<int,int> m;
+        for(int i: deck){
+            m[i]++;
+        }
+        set<int> s;
+        for(auto i: m){
+            s.insert(i.second);
+        }
+        int n=*s.begin();
+        vector<int> L;
+        for(int i=2;i<=n;i++){
+            if(n%i==0) L.push_back(i);
+        }
+        for(auto a: s){
+            int j=L.size();
+            for(int i=0;i<j;i++){
+                if(a%L[i]==0) L.push_back(L[i]);
+            }
+            L.erase(L.begin(),L.begin()+j);
+            if(L.empty()) return false;
+        }
+        return true;
+    }
+};
+
+//Python
+class Solution:
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+        L = collections.Counter(deck).values()
+        n=min(L)
+        search=[]
+        for i in range(2,n+1):
+            if n%i==0: search.append(i)
+        for a in L:
+            for i in search[:]:
+                if a%i!=0: search.remove(i)   
+            if len(search)==0: return False
+        return True

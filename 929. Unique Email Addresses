@@ -1,0 +1,31 @@
+//C++
+class Solution {
+public:
+    int numUniqueEmails(vector<string>& emails) {
+        set<string> S;
+        for(string L: emails){
+            string s;
+            for(char n: L){
+                if(n=='@' || n=='+') break;
+                else if(n=='.') continue;
+                else s+=n;
+            }
+            S.insert(s+L.substr(L.find("@")));
+        }
+        return S.size();
+    }
+};
+
+//Python
+class Solution:
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        S=set()
+        for L in emails:
+            L=list(L)
+            s=""
+            for n in L:
+                if n=='@' or n=='+': break
+                elif n=='.': continue
+                else: s+=n
+            S.add(s+''.join(L[L.index('@'):]))
+        return len(S)

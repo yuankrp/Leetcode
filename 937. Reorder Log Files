@@ -1,0 +1,44 @@
+//C++
+class Solution {
+public:
+    vector<string> reorderLogFiles(vector<string>& logs) {
+        vector<string> La,Ld;
+        for(string s: logs){
+            if(isalpha(s[s.find(" ")+1])){
+                if(La.size()==0 || La.back().substr(La.back().find(" ")+1)<
+                   s.substr(s.find(" ")+1)) La.push_back(s);
+                else{
+                    int i=0;
+                    while(La[i].substr(La[i].find(" ")+1)<s.substr(s.find(" ")+1)){
+                        i++;
+                    }
+                    if(La[i].substr(La[i].find(" ")+1)==s.substr(s.find(" ")+1)){
+                        if(La[i]<s) i++;
+                    }
+                    La.insert(La.begin()+i,s);
+                }
+            }
+            else Ld.push_back(s);
+        }
+        La.insert(La.end(),Ld.begin(),Ld.end());
+        return La;
+    }
+};
+
+//Python
+class Solution:
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        La=[]
+        Ld=[]
+        for s in logs:
+            if s[s.index(' ')+1].isalpha():
+                if len(La)==0 or La[-1][La[-1].index(' ')+1:]<s[s.index(' ')+1:]: La.append(s)
+                else:
+                    i=0
+                    while La[i][La[i].index(' ')+1:]<s[s.index(' ')+1:]:
+                        i+=1
+                    if La[i][La[i].index(' ')+1:]==s[s.index(' ')+1:]:
+                        if La[i]<s: i+=1
+                    La.insert(i,s)
+            else: Ld.append(s)
+        return La+Ld

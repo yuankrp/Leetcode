@@ -1,0 +1,37 @@
+//C++
+class Solution {
+public:
+    vector<int> diStringMatch(string S) {
+        vector<int> A;
+        int j=0;
+        for(int i=0;i<S.length();i++){
+            A.push_back(i);
+            if(S[i]=='D') j++;
+            else{
+                reverse(A.begin()+i-j,A.begin()+i+1);
+                j=0;
+            }
+        }
+        A.push_back(S.length());
+        if(j!=0) reverse(A.end()-j-1,A.end());
+        return A;
+    }
+};
+
+//Python
+class Solution:
+    def diStringMatch(self, S: str) -> List[int]:
+        A=[i for i in range(len(S)+1)]
+        j=0
+        for i in range(len(S)):
+            if S[i]=='D': j+=1
+            else:
+                a=A[i-j:i+1]
+                a.reverse()
+                A[i-j:i+1]=a
+                j=0
+        if j!=0:
+            a=A[len(S)-j:]
+            a.reverse()
+            A[len(S)-j:]=a
+        return A

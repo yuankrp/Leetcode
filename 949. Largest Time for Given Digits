@@ -1,0 +1,53 @@
+//C++
+class Solution {
+public:
+    string largestTimeFromDigits(vector<int>& A) {
+        vector<int> p(4);
+        p[0] = 0; p[1] = 1; p[2] = 2; p[3] = 3;
+        int ans = -1;
+        do {
+            int cur = 0;
+            for (int i = 0; i < 4; i++){
+                cur = cur * 10 + A[p[i]];
+            }
+            if (check(cur)) {
+                if (cur > ans)
+                    ans = cur;
+            }
+        } while (next_permutation(p.begin(), p.end()));
+        if(ans<0) return "";
+        else{
+            int a=ans/100,b=ans%100;
+            string h=to_string(a),m=to_string(b);
+            if(a<10) h="0"+h;
+            if(b<10) m="0"+m;
+            return h+":"+m;
+        }
+    }
+    
+    bool check(int t) {
+        int hh = t / 100, mm = t % 100;
+        return 0 <= hh && hh < 24 && 0 <= mm && mm < 60;
+    }
+};
+
+//Python
+class Solution:
+    def largestTimeFromDigits(self, A: List[int]) -> str:
+        ans=-1
+        for h1, h2, m1, m2 in itertools.permutations(A):
+            hours = 10*h1 + h2
+            mins = 10*m1 + m2
+            time = 100*hours + mins
+            if 0 <= hours < 24 and 0 <= mins < 60 and time > ans: ans=time
+        if ans<0: return ""
+        else:
+            a=ans//100
+            b=ans%100
+            h=""
+            m=""
+            if a<10: h="0"+str(a)
+            else: h=str(a)
+            if b<10: m="0"+str(b)
+            else: m=str(b)
+            return h+":"+m

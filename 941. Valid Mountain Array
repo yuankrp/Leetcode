@@ -1,0 +1,34 @@
+//C++
+class Solution {
+public:
+    bool validMountainArray(vector<int>& A) {
+        if(A.size()<3) return false;
+        int i=1;
+        while(i<A.size()){
+            if(A[i]<=A[i-1]) break;
+            else i++;
+        }
+        if(i==1 || i==A.size()) return false;
+        while(i<A.size()){
+            if(A[i]>=A[i-1]) break;
+            else i++;
+        }
+        if(i!=A.size()) return false;
+        return true;
+    }
+};
+
+//Python
+class Solution:
+    def validMountainArray(self, A: List[int]) -> bool:
+        if len(A)<3: return False
+        i=1
+        while i<len(A):
+            if A[i]<=A[i-1]: break
+            else: i+=1
+        if i==1 or i==len(A): return False
+        while i<len(A):
+            if A[i]>=A[i-1]: break
+            else: i+=1
+        if i!=len(A): return False
+        return True

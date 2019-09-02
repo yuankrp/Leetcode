@@ -1,0 +1,22 @@
+//C++
+class Solution {
+public:
+    int repeatedNTimes(vector<int>& A) {
+        int res;
+        for(int i=0;i<A.size()-1;i++){
+            if(find(A.begin()+i+1,A.end(),A[i])!=A.end()){
+                res=A[i];
+                break;
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def repeatedNTimes(self, A: List[int]) -> int:
+        L=[]
+        for a in A:
+            if a not in L: L.append(a)
+            else: return a

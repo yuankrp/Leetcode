@@ -1,0 +1,32 @@
+//C++
+class Solution {
+public:
+    vector<int> sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& queries) {
+        int s=0;
+        vector<int> res;
+        for(int a: A){
+            if(a%2==0) s+=a;
+        }
+        for(auto q: queries){
+            if(A[q[1]]%2==0) s-=A[q[1]];
+            A[q[1]]+=q[0];
+            if(A[q[1]]%2==0) s+=A[q[1]];
+            res.push_back(s);
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def sumEvenAfterQueries(self, A: List[int], queries: List[List[int]]) -> List[int]:
+        s=0
+        for a in A:
+            if a%2==0: s+=a
+        res=[]
+        for q in queries:
+            if A[q[1]]%2==0: s-=A[q[1]]
+            A[q[1]]+=q[0]
+            if A[q[1]]%2==0: s+=A[q[1]]
+            res.append(s)
+        return res

@@ -1,0 +1,19 @@
+//C++
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& A) {
+        for(int i=0;i<A.size();i++){
+            A[i]=A[i]*A[i];
+        }
+        sort(A.begin(),A.end());
+        return A;
+    }
+};
+
+//Python
+class Solution:
+    def sortedSquares(self, A: List[int]) -> List[int]:
+        for i in range(len(A)):
+            A[i]=A[i]*A[i]
+        A.sort()
+        return A

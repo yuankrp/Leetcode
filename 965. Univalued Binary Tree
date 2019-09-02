@@ -1,0 +1,54 @@
+//
+C++/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isUnivalTree(TreeNode* root) {
+        if(!root) return false;
+        int val=root->val;
+        vector<TreeNode*> L{root};
+        while(!L.empty()){
+            TreeNode* p=L.back();
+            L.pop_back();
+            if(p->left){
+                if(p->left->val!=val) return false;
+                else L.push_back(p->left);
+            }
+            if(p->right){
+                if(p->right->val!=val) return false;
+                else L.push_back(p->right);
+            }
+        }
+        return true;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isUnivalTree(self, root: TreeNode) -> bool:
+        if not root: return False
+        v=root.val
+        L=[root]
+        while len(L)>0:
+            p=L.pop()
+            if p.left:
+                if p.left.val!=v: return False
+                else: L.append(p.left)
+            if p.right:
+                if p.right.val!=v: return False
+                else: L.append(p.right)
+        return True

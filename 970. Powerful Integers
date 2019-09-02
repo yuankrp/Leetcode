@@ -1,0 +1,53 @@
+//C++
+class Solution {
+public:
+    vector<int> powerfulIntegers(int x, int y, int bound) {
+        if(x==1 && y==1){
+            if(bound>=2) return{2};
+            else return {};
+        }
+        vector<int> L;
+        int a=min(x,y),b=max(x,y),m=0;
+        while(1+pow(b,m)<=bound){
+            L.push_back(1+pow(b,m));
+            m++;
+        }
+        if(a==1) return L;
+        else{
+            for(int i=0;i<=m;i++){
+                int j=1;
+                while(pow(a,j)+pow(b,i)<=bound){
+                    if(find(L.begin(),L.end(),pow(a,j)+pow(b,i))==L.end()){
+                        L.push_back(pow(a,j)+pow(b,i));
+                    }
+                    j++;
+                }
+            }
+            return L;
+        }
+    }
+};
+
+//Python
+class Solution:
+    def powerfulIntegers(self, x: int, y: int, bound: int) -> List[int]:
+        if x==1 and y==1:
+            if bound>=2: return [2]
+            else: return []
+        L=[]
+        a=min(x,y)
+        b=max(x,y)
+        m=0
+        while 1+pow(b,m)<=bound:
+            L.append(1+pow(b,m))
+            m+=1
+        if a==1:
+            return L
+        else:
+            for i in range(m+1):
+                j=1
+                while pow(a,j)+pow(b,i)<=bound:
+                    if pow(a,j)+pow(b,i) not in L:
+                        L.append(pow(a,j)+pow(b,i))
+                    j+=1
+            return L

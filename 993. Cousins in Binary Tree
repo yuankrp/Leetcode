@@ -1,0 +1,83 @@
+//C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isCousins(TreeNode* root, int x, int y) {
+        queue<TreeNode*> L;
+        L.push(root);
+        map<int,int>par;
+        par[root->val]=0;
+        int father=0;
+        while(!L.empty()){
+            int n=L.size();
+            bool flag=0;
+            for(int i=0;i<n;i++){
+                TreeNode* p=L.front();
+                L.pop();
+                if(p->val==x || p->val==y){
+                    if(flag){
+                        if(par[p->val]!=father) return true;
+                        else return false;
+                    }
+                    else{
+                        flag=1;
+                        father=par[p->val];
+                    }
+                }
+                if(p->left){
+                    L.push(p->left);
+                    par[p->left->val]=p->val;
+                }
+                if(p->right){
+                    L.push(p->right);
+                    par[p->right->val]=p->val;
+                }
+            }
+            if(flag) return false;
+        }
+        return false;
+    }
+};
+
+//Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
+        L=[root]
+        par={}
+        par[root.val]=0
+        father=0
+        while len(L)>0:
+            n=len(L)
+            flag=0
+            for i in range(n):
+                p=L.pop(0)
+                if p.val==x or p.val==y:
+                    if flag:
+                        if par[p.val]!=father: return True
+                        else: return False
+                    else:
+                        flag=1
+                        father=par[p.val]
+                if p.left:
+                    L.append(p.left)
+                    par[p.left.val]=p.val
+                if p.right:
+                    L.append(p.right)
+                    par[p.right.val]=p.val
+            if flag: return False
+        return False

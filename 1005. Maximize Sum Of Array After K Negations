@@ -1,0 +1,25 @@
+//C++
+class Solution {
+public:
+    int largestSumAfterKNegations(vector<int>& A, int K) {
+        sort(A.begin(),A.end());
+        int i=0;
+        while(i<A.size()){
+            if(i<K && A[i]<0) A[i]=-A[i];
+            else break;
+            i++;
+        }
+        if(i==K || count(A.begin(),A.end(),0) || (K-i)%2==0) return accumulate(A.begin(),A.end(),0);
+        else return accumulate(A.begin(),A.end(),0)-2*(*min_element(A.begin(),A.end()));
+    }
+};
+
+//Python
+class Solution:
+    def largestSumAfterKNegations(self, A: List[int], K: int) -> int:
+        A.sort()
+        for i in range(len(A)):
+            if i<K and A[i]<0: A[i]=-A[i]
+            else: break
+        if i==K or A.count(0) or (K-i)%2==0: return sum(A)
+        else: return sum(A)-2*min(A)

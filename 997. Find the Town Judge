@@ -1,0 +1,37 @@
+//C++
+class Solution {
+public:
+    int findJudge(int N, vector<vector<int>>& trust) {
+        vector<int> L(N,0);
+        for(auto t: trust){
+            L[t[0]-1]=1;
+        }
+        int r=-1;
+        if(count(L.begin(),L.end(),0)==1) r=find(L.begin(),L.end(),0)-L.begin()+1;
+        else return r;
+        vector<int> J(N,0);
+        J[r-1]=1;
+        for(auto t: trust){
+            if(t[1]==r) J[t[0]-1]=1;
+        }
+        if(count(J.begin(),J.end(),0)==0) return r;
+        else return -1;
+    }
+};
+
+//Python
+class Solution:
+    def findJudge(self, N: int, trust: List[List[int]]) -> int:
+        L=[0 for i in range(N)]
+        for t in trust:
+            L[t[0]-1]=1
+        r=-1
+        if L.count(0)==1: r=L.index(0)+1
+        else: return r
+        J=[0 for i in range(N)]
+        J[r-1]=1
+        for t in trust:
+            if t[1]==r: J[t[0]-1]=1
+        if J.count(0)==0: return r
+        else: return -1
+        

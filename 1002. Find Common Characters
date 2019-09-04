@@ -1,0 +1,46 @@
+//C++
+class Solution {
+public:
+    vector<string> commonChars(vector<string>& A) {
+        set<char> S(A[0].begin(),A[0].end());
+        vector<string> res;
+        for(char s: S){
+            int n=count(A[0].begin(),A[0].end(),s);
+            int c=0,i=1;
+            while(i<A.size()){
+                int a=count(A[i].begin(),A[i].end(),s);
+                if(a>0){
+                    n=min(a,n);
+                    c++;
+                }
+                i++;
+            }
+            if(c==A.size()-1){
+                for(int i=0;i<n;i++){
+                    res.push_back(string(1,s));
+                }
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def commonChars(self, A: List[str]) -> List[str]:
+        if len(A)==1: return list(A[0])
+        S=set(list(A[0]))
+        res=[]
+        for s in S:
+            n=A[0].count(s)
+            c=0
+            i=1
+            while i<len(A):
+                if A[i].count(s)>0:
+                    n=min(A[i].count(s),n)
+                    c+=1
+                i+=1
+            if c==len(A)-1:
+                for k in range(n):
+                    res.append(s)
+        return res

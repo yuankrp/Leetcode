@@ -1,0 +1,28 @@
+//C++
+class Solution {
+public:
+    int bitwiseComplement(int N) {
+        if(!N) return 1;
+        int s=0,i=0,a=0;
+        while(N>0){
+            a=1-(N&1);
+            if(a) s+=pow(2,i);
+            N=N>>1;
+            i++;
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def bitwiseComplement(self, N: int) -> int:
+        if N==0: return 1
+        s=0
+        i=0
+        while N>0:
+            a=1-(N&1)
+            if a: s+=pow(2,i)
+            N=N>>1
+            i+=1
+        return s

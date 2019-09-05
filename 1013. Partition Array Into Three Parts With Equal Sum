@@ -1,0 +1,43 @@
+//C++
+class Solution {
+public:
+    bool canThreePartsEqualSum(vector<int>& A) {
+        int s=accumulate(A.begin(),A.end(),0)/3;
+        int a=s,p=0;
+        for(int i=0;i<A.size();i++){
+            if(p==2){
+                if(accumulate(A.begin()+i,A.end(),0)==s) return true;
+                else return false;
+            }
+            a-=A[i];
+            if(i==A.size()-1){
+                if(a!=0) return false;
+                else p++;
+            }
+            else if(a==0 && A[i+1]!=0){
+                p++;
+                a=s;
+            }
+        }
+        return false;
+    }
+};
+
+//Python
+class Solution:
+    def canThreePartsEqualSum(self, A: List[int]) -> bool:
+        s=sum(A)//3
+        a=s
+        p=0
+        for i in range(len(A)):
+            if p==2:
+                if sum(A[i:])==s: return True
+                else: return False
+            a-=A[i]
+            if i==len(A)-1:
+                if a!=0: return False
+                else: p+=1
+            elif a==0 and A[i+1]!=0:
+                p+=1
+                a=s
+        return False

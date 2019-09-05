@@ -1,0 +1,25 @@
+//C++
+class Solution {
+public:
+    int numPairsDivisibleBy60(vector<int>& time) {
+        vector<int> L(60,0);
+        int s=0;
+        for(int i=0;i<time.size();i++){
+            if(time[i]%60==0) s+=L[0];
+            else s+=L[60-time[i]%60];
+            L[time[i]%60]++;
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def numPairsDivisibleBy60(self, time: List[int]) -> int:
+        s=0
+        L=[0 for i in range(60)]
+        for i in range(len(time)):
+            if time[i]%60==0: s+=L[0]
+            else: s+=L[60-time[i]%60]
+            L[time[i]%60]+=1
+        return s

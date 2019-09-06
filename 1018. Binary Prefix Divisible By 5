@@ -1,0 +1,25 @@
+//C++
+class Solution {
+public:
+    vector<bool> prefixesDivBy5(vector<int>& A) {
+        vector<bool> res;
+        int s=0;
+        for(int i=0;i<A.size();i++){
+            s=(s*2+A[i])%10;
+            if(s%5==0) res.push_back(true);
+            else res.push_back(false);
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def prefixesDivBy5(self, A: List[int]) -> List[bool]:
+        res=[]
+        s=0
+        for i in range(len(A)):
+            s=(s*2+A[i])%10
+            if s%5==0: res.append(True)
+            else: res.append(False)
+        return res

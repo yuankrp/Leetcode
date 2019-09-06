@@ -1,0 +1,27 @@
+//C++
+class Solution {
+public:
+    bool divisorGame(int N) {
+        vector <int> L={0,1,0};
+        for(int i=4;i<=1000;i++){
+            int flag=0;
+            for(int j=1;j<=sqrt(i);j++){
+                if(i%j==0 && L[i-j-1]==0) flag=1;
+            }
+            L.push_back(flag);
+        }
+        return L[N-1];
+    }
+};
+
+//Python
+class Solution:
+    def divisorGame(self, N: int) -> bool:
+        L=[0 for i in range(1000)]
+        L[1]=1
+        for i in range(4,1001):
+            flag=0
+            for j in range(1,int(math.sqrt(i))):
+                if i%j==0 and L[i-j-1]==0: flag=1
+            L[i-1]=flag
+        return L[N-1]

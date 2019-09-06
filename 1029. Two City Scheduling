@@ -1,0 +1,59 @@
+//C++
+class Solution {
+public:
+    int twoCitySchedCost(vector<vector<int>>& costs) {
+        int a=0,b=0,s=0;
+        vector<int> A,B;
+        for(auto c: costs){
+            if(c[0]>=c[1]){
+                s+=c[1];
+                B.push_back(c[0]-c[1]);
+            }
+            else{
+                s+=c[0];
+                A.push_back(c[1]-c[0]);
+            }
+        }
+        int n=(A.size()-B.size())/2;
+        if(n!=0){
+            sort(A.begin(),A.end());
+            sort(B.begin(),B.end());
+            if(n>0){
+                for(int i=0;i<n;i++){
+                    s+=A[i];
+                }
+            }
+            else{
+                for(int i=0;i<-n;i++){
+                    s+=B[i];
+                }
+            }
+        }
+        return s;          
+    }
+};
+
+//Python
+class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        a=b=s=0        
+        GA=[]
+        GB=[]
+        for c in costs:
+            if c[0]>=c[1]:
+                s+=c[1]
+                GB.append(c[0]-c[1])
+            else:
+                s+=c[0]
+                GA.append(c[1]-c[0])
+        n=len(GA)-len(GB)
+        if n!=0:
+            GA.sort()
+            GB.sort()
+            if n>0:
+                for i in range(n//2):
+                    s+=GA[i]
+            else:
+                for i in range(-n//2):
+                    s+=GB[i]
+        return s

@@ -1,0 +1,31 @@
+//C++
+class Solution {
+public:
+    bool isBoomerang(vector<vector<int>>& points) {
+        vector<float> L;
+        L.push_back(pointsDistance(points[0],points[1]));
+        L.push_back(pointsDistance(points[0],points[2]));
+        L.push_back(pointsDistance(points[1],points[2]));
+        sort(L.begin(),L.end());
+        if(L[0]+L[1]==L[2]) return false;
+        else return true;
+    }
+    
+    float pointsDistance(vector<int>& p1, vector<int>& p2){
+        return sqrt(pow(p1[0]-p2[0],2)+pow(p1[1]-p2[1],2));
+    }
+};
+
+//Python
+class Solution:
+    def isBoomerang(self, points: List[List[int]]) -> bool:
+        L=[]
+        L.append(self.pointsDistance(points[0],points[1]))
+        L.append(self.pointsDistance(points[0],points[2]))
+        L.append(self.pointsDistance(points[1],points[2]))
+        L.sort()
+        if L[0]+L[1]==L[2]: return False
+        else: return True
+        
+    def pointsDistance(self, p1: List[int], p2: List[int]) -> float:
+        return math.sqrt(pow(p1[0]-p2[0],2)+pow(p1[1]-p2[1],2))

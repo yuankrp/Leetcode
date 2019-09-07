@@ -1,0 +1,21 @@
+//C++
+class Solution {
+public:
+    string removeDuplicates(string S) {
+        string res;
+        for(char s: S){
+            if(res.length()!=0 && s==res[res.length()-1]) res=res.substr(0,res.length()-1);
+            else res+=s;
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def removeDuplicates(self, S: str) -> str:
+        L=[]
+        for s in S:
+            if len(L)!=0 and L[-1]==s: L.pop()
+            else: L.append(s)
+        return "".join(L)

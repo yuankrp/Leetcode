@@ -1,0 +1,27 @@
+//C++
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        while(stones.size()>1){
+            sort(stones.begin(),stones.end());
+            int a=stones.back();
+            stones.pop_back();
+            int b=stones.back();
+            stones.pop_back();
+            if(a!=b) stones.push_back(a-b);       
+        }
+        if(stones.empty()) return 0;
+        else return stones[0];
+    }
+};
+
+//Python
+class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        while len(stones)>1:
+            stones.sort()
+            a=stones.pop()
+            b=stones.pop()
+            if a!=b: stones.append(a-b)
+        if len(stones)==0: return 0
+        else: return stones[0]

@@ -1,0 +1,43 @@
+//C++
+class Solution {
+public:
+    vector<int> gardenNoAdj(int N, vector<vector<int>>& paths) {
+        vector<vector<int>> P(N);
+        for(auto p: paths){
+            P[p[0]-1].push_back(p[1]-1);
+            P[p[1]-1].push_back(p[0]-1);
+        }
+        vector<int> res(N,0);
+        for(int i=0;i<N;i++){
+            vector<int> nb;
+            for(int n: P[i]){
+                nb.push_back(res[n]);
+            }
+            int c=1;
+            while(find(nb.begin(),nb.end(),c)!=nb.end()){
+                c++;
+            }
+            res[i]=c;
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def gardenNoAdj(self, N: int, paths: List[List[int]]) -> List[int]:
+        P=[[] for i in range(N)]
+        for p in paths:
+            P[p[0]-1].append(p[1]-1)
+            P[p[1]-1].append(p[0]-1)
+        res=[0 for i in range(N)]
+        for i in range(N):
+            nb=[]
+            for n in P[i]:
+                nb.append(res[n])
+            c=1
+            while c in nb:
+                c+=1
+            res[i]=c
+        return res
+                    

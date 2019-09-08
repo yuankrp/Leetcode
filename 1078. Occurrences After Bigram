@@ -1,0 +1,38 @@
+//C++
+class Solution {
+public:
+    vector<string> findOcurrences(string text, string first, string second) {
+        vector<string> res;
+        string s=first+" "+second+" ";
+        if(s==text.substr(0,s.length())){
+            string t;
+            for(int i=s.length();i<text.length();i++){
+                if(text[i]==' ') break;
+                t+=text[i];
+            }
+            res.push_back(t);
+        }
+        s=" "+s;
+        for(int i=0;i<text.length()-s.length()+1;i++){
+            if(text.substr(i,s.length())==s){
+                string t;
+                int j=i+s.length();
+                while(j<text.length()&&text[j]!=' '){
+                    t+=text[j];
+                    j++;
+                }
+                res.push_back(t);
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def findOcurrences(self, text: str, first: str, second: str) -> List[str]:
+        L=text.split()
+        res=[]
+        for i in range(2,len(L)):
+            if L[i-2]==first and L[i-1]==second: res.append(L[i])
+        return res

@@ -1,0 +1,46 @@
+//C++
+class Solution {
+public:
+    vector<int> distributeCandies(int candies, int num_people) {
+        vector<int> L(num_people,0);
+        int i=0;
+        while(candies-(1+(2*i+1)*num_people)*num_people/2>0){
+            candies-=(1+(2*i+1)*num_people)*num_people/2;
+            for(int j=0;j<num_people;j++){
+                L[j]+=i*num_people+1+j;
+            }
+            i++;
+        }
+        if(candies==0) return L;
+        for(int j=0;j<num_people;j++)
+            if(candies>i*num_people+1+j){
+                candies-=i*num_people+1+j;
+                L[j]+=i*num_people+1+j;
+            } 
+            else{
+                L[j]+=candies;
+                break;
+            }      
+        return L;
+    }
+};
+
+//Python
+class Solution:
+    def distributeCandies(self, candies: int, num_people: int) -> List[int]:
+        L=[0 for i in range(num_people)]
+        i=0
+        while candies-(1+(2*i+1)*num_people)*num_people//2>0:
+            candies-=(1+(2*i+1)*num_people)*num_people//2
+            for j in range(num_people):
+                L[j]+=i*num_people+1+j
+            i+=1
+        if candies==0: return L
+        for j in range(num_people):
+            if candies>i*num_people+1+j:
+                candies-=i*num_people+1+j
+                L[j]+=i*num_people+1+j
+            else:
+                L[j]+=candies
+                break
+        return L

@@ -1,0 +1,37 @@
+//C++
+class Solution {
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+        map<int,int> m;
+        for(int a: arr1){
+            m[a]++;
+        }
+        vector<int> L;
+        sort(arr1.begin(),arr1.end());
+        for(int a: arr2){
+            int i=m[a];
+            arr1.erase(find(arr1.begin(),arr1.end(),a),find(arr1.begin(),arr1.end(),a)+m[a]);
+            while(i>0){
+                L.push_back(a);
+                i--;
+            }
+        }
+        L.insert(L.end(),arr1.begin(),arr1.end());
+        return L;
+    }
+};
+
+//Python
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        D={}
+        for a in arr1:
+            if a in D: D[a]+=1
+            else: D[a]=1
+        L=[]
+        for a in arr2:
+            for i in range(D[a]):
+                L.append(a)
+                arr1.remove(a)
+        arr1.sort()
+        return L+arr1

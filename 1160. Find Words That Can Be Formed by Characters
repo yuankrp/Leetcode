@@ -1,0 +1,29 @@
+//C++
+class Solution {
+public:
+    int countCharacters(vector<string>& words, string chars) {
+        int res=0;
+        for(string w: words){
+            if(w.length()<=chars.length()){
+                bool flag=1;
+                for(char c: w){
+                    if(count(w.begin(),w.end(),c)>count(chars.begin(),chars.end(),c)) flag=0;
+                }
+                if(flag) res+=w.length();
+            }
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        res=0
+        for w in words:
+            if len(w)<=len(chars):
+                flag=1
+                for c in w:
+                    if w.count(c)>chars.count(c): flag=0
+                if flag: res+=len(w)
+        return res

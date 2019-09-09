@@ -1,0 +1,31 @@
+//C++
+class Solution {
+public:
+    int numEquivDominoPairs(vector<vector<int>>& dominoes) {
+        map<int,int> m;
+        for(auto d: dominoes){
+            sort(d.begin(),d.end());
+            int t=d[0]*10+d[1];
+            m[t]++;
+        }
+        int s=0;
+        for(auto it: m){
+            s+=(it.second-1)*it.second/2;
+        }
+        return s;
+    }
+};
+
+//Python
+class Solution:
+    def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
+        D={}
+        for d in dominoes:
+            d.sort()
+            t=d[0]*10+d[1]
+            if t in D: D[t]+=1
+            else: D[t]=1
+        s=0
+        for v in D.values():
+            s+=v*(v-1)//2
+        return s

@@ -1,0 +1,19 @@
+//C++
+class Solution {
+public:
+    int distanceBetweenBusStops(vector<int>& distance, int start, int destination) {
+        int a=min(start,destination),b=max(start,destination);
+        int c=accumulate(distance.begin()+a,distance.begin()+b,0);
+        int d=accumulate(distance.begin(),distance.end(),0);
+        if(2*c<=d) return c;
+        else return d-c;
+    }
+};
+
+//Python
+class Solution:
+    def distanceBetweenBusStops(self, distance: List[int], start: int, destination: int) -> int:
+        a=min(start,destination)
+        b=max(start,destination)
+        if 2*sum(distance[a:b])<=sum(distance): return sum(distance[a:b])
+        else: return sum(distance)-sum(distance[a:b])

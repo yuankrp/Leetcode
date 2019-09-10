@@ -1,0 +1,53 @@
+//C++
+class Solution {
+public:
+    vector<int> numSmallerByFrequency(vector<string>& queries, vector<string>& words) {
+        vector<int> W;
+        for(string w: words){
+            W.push_back(numAlpha(w));
+        }
+        vector<int> res;
+        for(string q: queries){
+            int i=0,n=numAlpha(q);
+            for(int w: W){
+                if(w>n) i++;
+            }
+            res.push_back(i);
+        }
+        return res;
+    }
+    
+    int numAlpha(string s){
+        vector<int> v(26,0);
+        for(char c: s){
+            v[c-'a']++;
+        }
+        for(int i: v){
+            if(i!=0){
+                return i;
+            }
+        }
+        return 0;
+    }
+};
+
+//Python
+class Solution:
+    def numSmallerByFrequency(self, queries: List[str], words: List[str]) -> List[int]:
+        W=[]
+        for w in words:
+            W.append(self.numAlpha(w))
+        W.sort()
+        Q=[]
+        for q in queries:
+            n=self.numAlpha(q)
+            i=0
+            while i<len(W) and W[i]<=n:
+                i+=1
+            Q.append(len(W)-i)
+        return Q
+    
+    def numAlpha(self, s: str) -> int:
+        s=list(s)
+        s.sort()
+        return s.count(s[0])

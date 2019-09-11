@@ -1,0 +1,32 @@
+//C++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.length()<2) return s.length();
+        int ls=0;
+        vector<char> L={s[0]};
+        for(int i=1;i<s.length();i++){
+            if(find(L.begin(),L.end(),s[i])!=L.end()){
+                if(L.size()>ls) ls=L.size();
+                L.erase(L.begin(),find(L.begin(),L.end(),s[i])+1);
+            }
+            L.push_back(s[i]);
+        }
+        if(L.size()>ls) ls=L.size();
+        return ls;
+    }
+};
+
+//Python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if len(s)<2: return len(s)
+        ls=0
+        L=[s[0]]
+        for i in range(1,len(s)):
+            if s[i] in L:
+                ls=max(ls,len(L))
+                L=L[L.index(s[i])+1:]
+            L.append(s[i])
+        ls=max(ls,len(L))
+        return ls

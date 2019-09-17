@@ -1,0 +1,49 @@
+//C++
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        if(digits.empty()) return {};
+        map<char,vector<char>> D;
+        D['2']={'a','b','c'};
+        D['3']={'d','e','f'};
+        D['4']={'g','h','i'};
+        D['5']={'j','k','l'};
+        D['6']={'m','n','o'};
+        D['7']={'p','q','r','s'};
+        D['8']={'t','u','v'};
+        D['9']={'w','x','y','z'};
+        vector<string> res{""};
+        for(int i=0;i<digits.size();i++){
+            int L=res.size();
+            for(int j=0;j<L;j++){
+                for(char d: D[digits[i]]){
+                    res.push_back(res[j]+d);
+                }
+            }
+            res.erase(res.begin(),res.begin()+L);
+        }
+        return res;
+    }
+};
+
+//Python
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if len(digits)==0: return []
+        D={}
+        D['2']=['a','b','c']
+        D['3']=['d','e','f']
+        D['4']=['g','h','i']
+        D['5']=['j','k','l']
+        D['6']=['m','n','o']
+        D['7']=['p','q','r','s']
+        D['8']=['t','u','v']
+        D['9']=['w','x','y','z']
+        res=['']
+        for i in range(len(digits)):
+            L=len(res)
+            for j in range(L):
+                for d in D[digits[i]]:
+                    res.append(res[j]+d)               
+            del res[0:L]
+        return res

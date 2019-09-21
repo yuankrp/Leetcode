@@ -1,0 +1,52 @@
+//C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode *p1=head,*p2=head;
+        while(n>0){
+            n--;
+            p2=p2->next;
+        }
+        if(p2==NULL) return head->next;
+        p2=p2->next;
+        while(p2){
+            p1=p1->next;
+            p2=p2->next;
+        }
+        ListNode *q=p1->next;
+        p1->next=q->next;
+        return head;
+    }
+};
+
+//Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        L=0
+        p=head
+        while p:
+            L+=1
+            p=p.next
+        k=L-n
+        if k==0: return head.next
+        p=head
+        while k-1>0:
+            p=p.next
+            k-=1
+        q=p.next
+        p.next=q.next
+        return head

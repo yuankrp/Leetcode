@@ -1,0 +1,62 @@
+//C++
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        if(nums.size()<4) return {};
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> L;
+        for(int i=0;i<nums.size()-3;i++){
+            if(target>=0 && nums[i]>target) return L;
+            if(i>0 && nums[i]==nums[i-1]) continue;
+            int j=i+1;
+            while(j<nums.size()-2){
+                if(target>=0 && nums[i]+nums[j]>target) break;
+                else if(j>i+1 && nums[j]==nums[j-1]) j++;
+                else{
+                    int m=j+1,n=nums.size()-1;
+                    while(m<n){
+                        if(nums[m]+nums[n]+nums[i]+nums[j]==target){
+                            L.push_back({nums[i],nums[j],nums[m],nums[n]});
+                            while(m<n && nums[m]==nums[m+1]) m++;
+                            while(m<n && nums[n]==nums[n-1]) n--;
+                            m++;
+                            n--;
+                        }
+                        else if(nums[i]+nums[j]+nums[m]+nums[n]>target) n--;
+                        else m++;
+                    }
+                    j++;
+                }
+            }
+        }
+        return L;
+    }
+};
+
+//Python
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        if len(nums)<4: return []
+        nums.sort()
+        L=[]
+        for i in range(len(nums)-3):
+            if target>=0 and nums[i]>target: return L
+            if i>0 and nums[i]==nums[i-1]: continue
+            j=i+1
+            while j<len(nums)-2:
+                if target>=0 and nums[i]+nums[j]>target: break
+                elif j>i+1 and nums[j]==nums[j-1]: j+=1
+                else:
+                    m=j+1
+                    n=len(nums)-1
+                    while m<n:
+                        if nums[m]+nums[n]+nums[i]+nums[j]==target:
+                            L.append([nums[i],nums[j],nums[m],nums[n]])
+                            while m<n and nums[m]==nums[m+1]: m+=1
+                            while m<n and nums[n]==nums[n-1]: n-=1
+                            m+=1
+                            n-=1
+                        elif nums[i]+nums[j]+nums[m]+nums[n]>target: n-=1
+                        else: m+=1
+                    j+=1
+        return L

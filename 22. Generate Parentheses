@@ -1,0 +1,37 @@
+//C++
+class Solution {
+private:
+    vector<string> res;
+    string s="";
+public:
+    vector<string> generateParenthesis(int n) {
+        formRes(s,0,0,n);
+        return res;
+    }
+        
+    void formRes(string s, int left, int right, int n){
+        if(s.length()==2*n){
+            res.push_back(s);
+            return;
+        }
+        if(left<n) formRes(s+'(',left+1,right,n);
+        if(right<left) formRes(s+')',left,right+1,n);
+    }
+};
+
+//Python
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res=[]
+        s=''
+        self.formRes(s,0,0,n,res)
+        return res
+        
+    def formRes(self, s: str, left: int, right: int, n: int, res: List[str]):
+        if len(s)==2*n:
+            res.append(s)
+            return
+        if left<n:
+            self.formRes(s+'(',left+1,right,n,res)
+        if right<left:
+            self.formRes(s+')',left,right+1,n,res)

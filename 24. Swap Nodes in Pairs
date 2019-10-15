@@ -1,0 +1,58 @@
+//C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(!head) return head;
+        ListNode *head2=head->next;
+        if(head2==NULL) return head;
+        head->next=head2->next;
+        head2->next=head;
+        ListNode *p=head;
+        ListNode *temp,*q;
+        while(p){
+            temp=p->next;
+            if(!temp) break;
+            q=temp->next;
+            if(!q) break;
+            p->next=q;
+            temp->next=q->next;
+            q->next=temp;  
+            p=temp;
+        }
+        return head2;
+    }
+};
+
+//Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        if not head: return head
+        head2=head.next
+        if not head2: return head
+        head.next=head2.next
+        head2.next=head
+        p=head
+        while p:
+            temp=p.next;
+            if not temp: break
+            q=temp.next
+            if not q: break
+            p.next=q
+            temp.next=q.next
+            q.next=temp  
+            p=temp
+        return head2

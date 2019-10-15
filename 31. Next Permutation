@@ -1,0 +1,41 @@
+//C++
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int idx=-1;
+        for(int i=0;i<nums.size()-1;i++){
+            if(nums[i+1]>nums[i]&&i>idx) idx=i;
+        }
+        if(idx==-1) sort(nums.begin(),nums.end());
+        else{
+            int j=idx+1;
+            for(int i=idx+1;i<nums.size();i++){
+                if(nums[i]>nums[idx]&&nums[i]<nums[j]) j=i;
+            }
+            int a=nums[idx];
+            nums[idx]=nums[j];
+            nums[j]=a;
+            sort(nums.begin()+idx+1,nums.end());
+        }
+    }
+};
+
+//Python
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        idx=-1
+        for i in range(len(nums)-1):
+            if nums[i+1]>nums[i] and i>idx: idx=i
+        if idx==-1: nums.sort()
+        else:
+            j=idx+1
+            for i in range(idx+1,len(nums)):
+                if nums[i]>nums[idx] and nums[i]<nums[j]: j=i
+            a=nums[idx]
+            nums[idx]=nums[j]
+            nums[j]=a
+            L=sorted(nums[idx+1:])
+            nums[idx+1:]=L

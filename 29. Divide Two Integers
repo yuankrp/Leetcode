@@ -1,0 +1,45 @@
+//C++
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(dividend==0) return 0;
+        if(dividend==INT_MIN&&divisor==-1) return INT_MAX;
+        int flag=1;
+        if((dividend<0)+(divisor<0)==1) flag=-1;
+        long a=labs(dividend);
+        long b=labs(divisor);
+        long res=0,d=0,c=1;
+        while(a>=b){
+            d=b;
+            c=1;
+            while(d+d<=a){
+                d+=d;
+                c+=c;
+            }
+            a-=d;
+            res+=c;
+        }
+        return res*flag;
+    }
+};
+
+//Python
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        if dividend==0: return 0
+        flag=1
+        if (dividend<0)+(divisor<0)==1: flag=-1
+        dividend=abs(dividend)
+        divisor=abs(divisor)
+        res=0
+        while dividend>=divisor:
+            d=divisor
+            c=1
+            while d+d<=dividend:
+                d+=d
+                c+=c
+            dividend-=d
+            res+=c
+        print(res,flag)
+        if res>0x7fffffff and flag>0: return 0x7fffffff
+        else: return res*flag
